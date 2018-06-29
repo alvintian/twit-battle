@@ -3,8 +3,15 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const environment = process.env.NODE_ENV || 'development';    // if something else isn't setting ENV, use development
+//const configuration = require('../knexfile')[environment];    // require environment's settings from knexfile
+//const database = require('knex')(configuration);              // connect to DB via knex using env's settings
+const knexConfig = require('../knexfile');
+const knex = require('knex')(knexConfig[environment]);
+const morgan = require('morgan');
+const knexLogger = require('knex-logger');
 
-const index = require('./routes/index');
+
 
 const app = express();
 
@@ -15,15 +22,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(morgan('dev'));
+
+// Log knex SQL queries to STDOUT as well
+app.use(knexLogger(knex));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use('/api', index);
+
+
+const index = require('./routes/index')(knex)
+
+app.use('/api', index)
 app.get('*', (req, res) => {
   res.sendFile('build/index.html', { root: global });
 });
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

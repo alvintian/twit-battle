@@ -1,8 +1,22 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/message', function(req, res, next) {
-  res.json('Welcome To React');
-});
+module.exports = function(knex) {
+	// router.get('/message', function(req, res, next) {
+	//   res.json('Welcome To React rjfoirf');
 
-module.exports = router;
+	// });
+
+	router.get('/message', (req, res) => {
+		knex
+			.select('*')
+			.from('users')
+			.then(results => {
+        console.log(results)
+				res.json(results);
+			});
+	});
+
+	return router;
+};
+
