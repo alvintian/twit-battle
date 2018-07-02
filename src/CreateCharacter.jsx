@@ -17,11 +17,12 @@ class CreateCharacter extends Component {
 
   handleEnterPressed = event => {
     event.preventDefault();
+    console.log(event.target.value,"eventbody");
     if (event.key === "Enter") {
       $.ajax({
         url: '/api/NewChar',
         method: 'POST',
-        data: event.target.value,
+        data: {character:event.target.value},
         success: console.log("everything works")
       });
 

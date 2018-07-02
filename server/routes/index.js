@@ -61,7 +61,7 @@ module.exports = function(knex) {
 		console.log(req.body,"what is req.body?");
 		knex('users')
 			.insert({
-				name: Object.keys(req.body)
+				name: req.body.character
 			})
 			.then(results => {
 				console.log(results)
