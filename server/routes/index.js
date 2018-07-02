@@ -60,9 +60,9 @@ module.exports = function(knex) {
 	router.post('/NewChar', (req, res) => {
 		console.log(req.body,"what is req.body?");
 		knex('users')
-			.insert([{
-				"name": username
-			}])
+			.insert({
+				name: Object.keys(req.body)
+			})
 			.then(results => {
 				console.log(results)
 				res.json(results);
