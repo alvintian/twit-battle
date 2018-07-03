@@ -3,6 +3,10 @@ import React, {
 } from 'react';
 import $ from 'jquery';
 // import Message from "./Message.jsx";
+
+
+
+
 class CreateCharacter extends Component {
    constructor(props) {
     super(props);
@@ -49,3 +53,4 @@ return  <div>
 }
 
 export default CreateCharacter;
+
