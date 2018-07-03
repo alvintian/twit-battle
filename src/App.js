@@ -4,6 +4,7 @@ import './App.css';
 import $ from 'jquery';
 import AllCharacters from './AllCharacters.jsx';
 import CreateCharacter from './CreateCharacter.jsx';
+import CurrentBattle from './CurrentBattle.jsx';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 const Home = () => (
@@ -38,12 +39,6 @@ const AllCharacter = ({ match }) => (
 			path={match.url}
 			render={() => <h3>please select a Character</h3>}
 		/>
-	</div>
-);
-
-const CurrentBattle = () => (
-	<div>
-		<h3>CurrentBattle displayed here</h3>
 	</div>
 );
 
