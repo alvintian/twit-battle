@@ -7,11 +7,9 @@ class AllCharacters extends Component {
 		super(props);
 		this.state = {
 			messages: this.props.ListMessage,
-//			id: this.props.key,
-			counter: 0
+			//			id: this.props.key,
+			counter: 0,
 		};
-
-		
 	}
 
 	// onItemClick = (event) => {
@@ -22,22 +20,24 @@ class AllCharacters extends Component {
 	// 		return {counter: prevState.counter + 1}
 	// 	})
 	// }
-// 	onItemClick = (event) => {
-// if(event.currentTarget.style.backgroundColor === '#ccc'){
-//     event.currentTarget.style.backgroundColor = 'coral';
-//  }else{
-//  	event.currentTarget.style.backgroundColor = '#ccc';
-//  }
-//         console.log(event.target);
-// }
-		getX(message) {
-				this.props.handleClickCard(message)
-		}
+	// 	onItemClick = (event) => {
+	// if(event.currentTarget.style.backgroundColor === '#ccc'){
+	//     event.currentTarget.style.backgroundColor = 'coral';
+	//  }else{
+	//  	event.currentTarget.style.backgroundColor = '#ccc';
+	//  }
+	//         console.log(event.target);
+	// }
 
 	render() {
 		let message = this.props.ListMessage;
 		let profile = (
-			<div className="border" title="profile" onClick={() => this.getX}>
+			<div
+				className="border"
+				title="profile"
+				onClick={() => {
+					this.props.onClick(message);
+				}}>
 				<h4>{message.name}</h4>
 				<li>HP: {message.hp}</li>
 				<li>ATT: {message.attack}</li>
