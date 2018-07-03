@@ -7,29 +7,41 @@ class AllCharacters extends Component {
 		super(props);
 		this.state = {
 			messages: this.props.ListMessage,
-			i:0
+//			id: this.props.key,
+			counter: 0
 		};
-//    this.handleClick = this.handleClick.bind(this);
+
+		
 	}
-onItemClick= function (event) {
-	  event.preventDefault();
-	//  event.stopPropagation();
-//this.setState({ i: 2 });
-if(event.currentTarget.style.backgroundColor === '#ccc'){
-    event.currentTarget.style.backgroundColor = 'coral';
- }else{
- 	event.currentTarget.style.backgroundColor = '#ccc';
- }
-        console.log(event.target);
-}
-	componentDidMount() {}
+
+	// onItemClick = (event) => {
+	// 	event.preventDefault();
+	// 	console.log('clicked');
+	// 	//  event.stopPropagation();
+	// 	this.setState((prevState,props) => {
+	// 		return {counter: prevState.counter + 1}
+	// 	})
+	// }
+// 	onItemClick = (event) => {
+// if(event.currentTarget.style.backgroundColor === '#ccc'){
+//     event.currentTarget.style.backgroundColor = 'coral';
+//  }else{
+//  	event.currentTarget.style.backgroundColor = '#ccc';
+//  }
+//         console.log(event.target);
+// }
+		getX(message) {
+				this.props.handleClickCard(message)
+		}
+
 	render() {
 		let message = this.props.ListMessage;
 		let profile = (
-			<div className="border" title="profile" onClick={this.onItemClick}>
+			<div className="border" title="profile" onClick={() => this.getX}>
 				<h4>{message.name}</h4>
 				<li>HP: {message.hp}</li>
 				<li>ATT: {message.attack}</li>
+				<li>id: {this.state.counter}</li>
 			</div>
 		);
 		// let profileAttr=document.getElementsByClassName("border");

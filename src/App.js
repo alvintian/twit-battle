@@ -51,6 +51,7 @@ class App extends Component {
 		};
 
 		this.postChartoDB = this.postChartoDB.bind(this);
+		// this.handleClickCard=this.handleClickCard.bind(this);
 	}
 
 	getData = () => {
@@ -96,6 +97,15 @@ class App extends Component {
 			console.log(response);
 		});
 	}
+	handleClickCard = (event) => {
+	// if(event.currentTarget.style.backgroundColor === '#ccc'){
+ //   		 event.currentTarget.style.backgroundColor = 'coral';
+ // 	}else{
+	//  	event.currentTarget.style.backgroundColor = '#ccc';
+	//  }
+        console.log(event);
+	}
+
 	render() {
 		let charNames = this.state.charNames;
 		console.log(charNames, "what's in charNames?");
@@ -132,7 +142,7 @@ class App extends Component {
 				</Router>
 				<h2>{this.state.message}</h2>
 				<h1>
-					{charNames.map(x => <AllCharacters ListMessage={x} key={x.id} />)}
+					{charNames.map(x => <AllCharacters ListMessage={x} key={x.id} onClick={(x) => this.handleClickCard(x)} />)}
 				</h1>
 			</div>
 		);
