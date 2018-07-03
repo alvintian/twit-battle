@@ -54,20 +54,53 @@ class App extends Component {
 			message: '',
 			charNames: [],
 		};
+
+		this.postChartoDB = this.postChartoDB.bind(this);
 	}
 
-	componentDidMount() {
-		// fetch('/api/message')
-		//   .then(response => response.json())
-		//   .then(json => this.setState({ message: json[0].name }));
+	getData = () => {
 		$.get('/api/message', data => {
 			this.setState({
 				message: data[0].name,
 				charNames: data,
 			});
 		});
+	};
+
+	componentDidMount() {
+		// fetch('/api/message')
+		//   .then(response => response.json())
+		//   .then(json => this.setState({ message: json[0].name }));
+		this.getData();
 	}
 
+	postChartoDB(charName, charAttr) {
+		// $.ajax({
+		// 	url: '/api/NewChar',
+		// 	method: 'POST',
+		// 	data: {
+		// 		character: charName,
+		// 		select: charAttr,
+		// 	},
+		// 	success: console.log(charAttr, 'post success'),
+		// });
+		fetch('/api/NewChar', {
+			method: 'post',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+
+			//make sure to serialize your JSON body
+			body: JSON.stringify({
+				character: charName,
+				select: charAttr,
+			}),
+		}).then(response => {
+			this.getData();
+			console.log(response);
+		});
+	}
 	render() {
 		let charNames = this.state.charNames;
 		console.log(charNames, "what's in charNames?");
@@ -88,8 +121,15 @@ class App extends Component {
 							<Link to="/CurBattle">Show Current Battle</Link>
 						</li>
 						<Route exact path="/" component={Home} />
-						<Route exact path="/NewChar"
-							render={() => <CreateCharacter content={this.state.message} />}
+						<Route
+							exact
+							path="/NewChar"
+							render={() => (
+								<CreateCharacter
+									content={this.state.message}
+									postChartoDB={this.postChartoDB}
+								/>
+							)}
 						/>
 						<Route exact path="/AllChar" component={AllCharacter} />
 						<Route exact path="/CurBattle" component={CurrentBattle} />
