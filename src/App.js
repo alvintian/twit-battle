@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import $ from 'jquery';
 import AllCharacters from './AllCharacters.jsx';
@@ -88,9 +88,7 @@ class App extends Component {
 							<Link to="/CurBattle">Show Current Battle</Link>
 						</li>
 						<Route exact path="/" component={Home} />
-						<Route
-							exact
-							path="/NewChar"
+						<Route exact path="/NewChar"
 							render={() => <CreateCharacter content={this.state.message} />}
 						/>
 						<Route exact path="/AllChar" component={AllCharacter} />

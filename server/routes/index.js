@@ -94,11 +94,45 @@ module.exports = function(knex) {
 				res.json(results);
 			});
 	});
+
 	router.post('/NewChar', (req, res) => {
-		console.log(req.body,"what is req.body?");
+		console.log(req.body.select,"O or T");
+		if(req.body.select==="T"){
+	let param = {screen_name: req.body.character};
+			client.get('users/show', param, function(error, tweets, response) {
+				if (error){
+					console.log(error)
+			// if(typeof(tweets.statuses_count)===undefined){
+			// 	}
+			}
+			if (!error) {
+	console.log(tweets.followers_count,"what is the followers count?");
+	console.log(tweets.statuses_count,"what is the tweet count?");
 		knex('users')
 			.insert({
-				name: req.body.character
+				name: req.body.character,hp:tweets.statuses_count,attack:tweets.followers_count
+			})
+			.then(results => {
+				console.log(results)
+				res.json(results);
+			});
+			}
+		  });
+}else{
+			knex('users')
+			.insert({
+				name: req.body.character,hp:100,attack:5
+			})
+			.then(results => {
+				console.log(results)
+				res.json(results);
+			});
+}
+	// 		let health=tweets.statuses_count;
+	// let attack=tweets.followers_count;
+		knex('users')
+			.insert({
+				name: req.body.character,hp:health,att:attack
 			})
 			.then(results => {
 				console.log(results)
