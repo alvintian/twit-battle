@@ -79,7 +79,7 @@ module.exports = function(knex) {
 			.select('*')
 			.from('battle')
 			.then(results => {
-				console.log(results,"pppppppppppppppppppppppp");
+				console.log(results, 'pppppppppppppppppppppppp');
 				res.json(results);
 			});
 	});
@@ -123,7 +123,7 @@ module.exports = function(knex) {
 				.insert({
 					name: req.body.character,
 					hp: 100,
-					attack: 5
+					attack: 5,
 				})
 				.then(results => {
 					console.log(results);
@@ -150,8 +150,8 @@ module.exports = function(knex) {
 		knex('battle')
 			.insert([
 				{
-					red_side_name: teamRed,
-					blue_side_name: teamBlue
+					red_side_name: req.body.teamRed,
+					blue_side_name: req.body.teamBlue,
 				},
 			])
 			.then(results => {
