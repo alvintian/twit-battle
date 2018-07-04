@@ -7,6 +7,7 @@ class AllCharacters extends Component {
 		super(props);
 		this.state = {
 			messages: this.props.ListMessage,
+			active: false,
 			//			id: this.props.key,
 			counter: 0,
 		};
@@ -20,24 +21,34 @@ class AllCharacters extends Component {
 	// 		return {counter: prevState.counter + 1}
 	// 	})
 	// }
-	// 	onItemClick = (event) => {
+		onItemClick = (event) => {
 	// if(event.currentTarget.style.backgroundColor === '#ccc'){
 	//     event.currentTarget.style.backgroundColor = 'coral';
 	//  }else{
 	//  	event.currentTarget.style.backgroundColor = '#ccc';
 	//  }
-	//         console.log(event.target);
-	// }
+	}
 
 	render() {
-		let message = this.props.ListMessage;
-		let profile = (
+		const { message } = this.props;
+		const style = this.state.active ? {
+			backgroundColor: 'blue'
+		} : {
+			backgroundColor: 'white'
+		}
+		let profile = ( 
 			<div
 				className="border"
 				title="profile"
 				onClick={() => {
 					this.props.onClick(message);
-				}}>
+					this.setState(prevState => {
+						console.log('clicked');
+						return {active: !prevState.active}
+					})
+				}}
+				style={style}
+			>
 				<h4>{message.name}</h4>
 				<li>HP: {message.hp}</li>
 				<li>ATT: {message.attack}</li>

@@ -98,10 +98,10 @@ class App extends Component {
 		});
 	}
 	handleClickCard = (event) => {
-	// if(event.currentTarget.style.backgroundColor === '#ccc'){
- //   		 event.currentTarget.style.backgroundColor = 'coral';
+	// if(event.style.backgroundColor === '#ccc'){
+ //   		 event.style.backgroundColor = 'coral';
  // 	}else{
-	//  	event.currentTarget.style.backgroundColor = '#ccc';
+	//  	event.style.backgroundColor = '#ccc';
 	//  }
         console.log(event);
 	}
@@ -142,7 +142,7 @@ class App extends Component {
 				</Router>
 				<h2>{this.state.message}</h2>
 				<h1>
-					{charNames.map(x => <AllCharacters ListMessage={x} key={x.id} onClick={(x) => this.handleClickCard(x)} />)}
+					{charNames.map(x => <AllCharacters message={x} key={x.id} onClick={(x) => this.handleClickCard(x)} />)}
 				</h1>
 			</div>
 		);
