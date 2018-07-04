@@ -8,22 +8,24 @@ class SelectableCharacters extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			RedTeamName:"",
-			BlueTeamName:""
+			RedTeamCharId:0,
+			BlueTeamCharId:0
 		};
 	}
 handleBattleStart=() => {
- 	this.props.postBattletoDB(this.state.RedTeamName, this.state.BlueTeamName);
+ 	this.props.postBattletoDB(this.state.RedTeamCharId, this.state.BlueTeamCharId);
       console.log(this.state,"BATTLE START!");
 }
-	handleClickCard = (event) => {
-		if(this.state.RedTeamName === ""){
+	handleClickCard = (card) => {
+		if(this.state.RedTeamCharId === 0){
 			this.setState({
-				RedTeamName: event.name
+				RedTeamCharId: card.id,
+				BlueTeamCharId: this.state.BlueTeamCharId
 			});
 		}else{
 			this.setState({
-				BlueTeamName: event.name
+				RedTeamCharId:this.state.RedTeamCharId,
+				BlueTeamCharId: card.id
 			});
 		}
       console.log(this.state,"what is the state?");

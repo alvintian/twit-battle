@@ -6,24 +6,33 @@ class CurrentBattle extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		teamNames: []
+		redSide: {},
+		blueSide: {}
 		};
 	}
 
 		getData = () => {
 		$.get('/api/CurBattle', data => {
 			this.setState({
-				teamNames: data,
+				redSide: data[0],
+				blueSide: data[1]
 			});
 		});
 	};
 
-	componentDidMount() {}
+	componentDidMount() {
+		// fetch('/api/message')
+		//   .then(response => response.json())
+		//   .then(json => this.setState({ message: json[0].name }));
+		this.getData();
+	}
 	render() {
-		console.log(this.state);
+		console.log(this.state.blueSide);
 		return (
 	<div>
 		<h3>CurrentBattle are displayed here</h3>
+		{this.state.redSide.name} VS {this.state.blueSide.name}
+		<button type="button" onClick={this.handleBattleStart}>Battle End</button>
 	</div>);
 	}
 }

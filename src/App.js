@@ -153,7 +153,6 @@ postBattletoDB(team_Red,team_Blue){
 						<Route exact path="/CurBattle" component={CurrentBattle} />
 					</div>
 				</Router>
-				<h2>{this.state.message}</h2>
 			</div>
 		);
 	}

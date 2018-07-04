@@ -42,7 +42,6 @@ module.exports = function(knex) {
 		// 	if (error) {
 		// 		console.log(error);
 		// 	}
-
 		// 	if (!error) {
 		// 		console.log(tweets);
 		// 	}
@@ -75,12 +74,20 @@ module.exports = function(knex) {
 			});
 	});
 	router.get('/CurBattle', (req, res) => {
+//		 select users.* from users join battle ON (active=true AND (battle.red_side_id=users.id or battle.blue_side_id=users.id));
 		knex
-			.select('*')
-			.from('battle')
+		.select('users.*')
+		.from('users')
+		.join('battle',function() {
+ 		 this.on('battle.red_side_id_fk','=','users.id').orOn('battle.blue_side_id_fk','=','users.id')
+			console.log("test2")
+ 		})
+ 		.where('active','=',true)
+// 		 this.on(function() {this.on('active','=',true)this.orOn(battle.red_side_id=users.id)this.orOn(battle.blue_side_id=users.id)})})
 			.then(results => {
-				console.log(results, 'pppppppppppppppppppppppp');
+				console.log(results);
 				res.json(results);
+//				res.json(results.rows);
 			});
 	});
 	router.get('/battle/:id', (req, res) => {
@@ -150,8 +157,9 @@ module.exports = function(knex) {
 		knex('battle')
 			.insert([
 				{
-					red_side_name: req.body.teamRed,
-					blue_side_name: req.body.teamBlue,
+					red_side_id_fk: req.body.teamRed,
+					blue_side_id_fk: req.body.teamBlue,
+					active: true
 				},
 			])
 			.then(results => {
