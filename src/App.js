@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import $ from 'jquery';
-import AllCharacters from './AllCharacters.jsx';
 import CreateCharacter from './CreateCharacter.jsx';
 import CurrentBattle from './CurrentBattle.jsx';
+import SelectableCharacters from './SelectableCharacters.jsx';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 const Home = () => (
@@ -13,35 +13,35 @@ const Home = () => (
 	</div>
 );
 
-const Character = ({ match }) => (
-	<div>
-		<h3>{match.params.charId}</h3>
-	</div>
-);
+// const Character = ({ match }) => (
+// 	<div>
+// 		<h3>{match.params.charId}</h3>
+// 	</div>
+// );
 
-const AllCharacter = ({ match }) => (
-	<div>
-		<h2>Every character is displayed here</h2>
-		<ul>
-			<li>
-				<Link to={`${match.url}/Char1`}>Char1</Link>
-			</li>
-			<li>
-				<Link to={`${match.url}/Char2`}>Char2</Link>
-			</li>
-			<li>
-				<Link to={`${match.url}/Char3`}>Char3</Link>
-			</li>
-		</ul>
-		<Route path="/AllChar/:charId" component={Character} />
-		<Route
-			exact
-			path={match.url}
-			render={() => <h3>please select a Character</h3>}
-		/>
-	</div>
-);
-
+// const AllCharacter = ({ match }) => (
+// 	<div>
+// 		<h2>Every character is displayed here</h2>
+// 		<ul>
+// 			<li>
+// 				<Link to={`${match.url}/Char1`}>Char1</Link>
+// 			</li>
+// 			<li>
+// 				<Link to={`${match.url}/Char2`}>Char2</Link>
+// 			</li>
+// 			<li>
+// 				<Link to={`${match.url}/Char3`}>Char3</Link>
+// 			</li>
+// 		</ul>
+// 		<Route path="/AllChar/:charId" component={Character} />
+// 		<Route
+// 			exact
+// 			path={match.url}
+// 			render={() => <h3>please select a Character</h3>}
+// 		/>
+// 	</div>
+// );
+//do not delete the comments.
 class App extends Component {
 	constructor() {
 		super();
@@ -49,7 +49,7 @@ class App extends Component {
 			message: '',
 			charNames: [],
 		};
-
+		this.postBattletoDB = this.postBattletoDB.bind(this);
 		this.postChartoDB = this.postChartoDB.bind(this);
 		// this.handleClickCard=this.handleClickCard.bind(this);
 	}
@@ -69,7 +69,21 @@ class App extends Component {
 		//   .then(json => this.setState({ message: json[0].name }));
 		this.getData();
 	}
-
+postBattletoDB(team_Red,team_Blue){
+		fetch('/api/CurBattle', {
+			method: 'post',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			//make sure to serialize your JSON body
+			body: JSON.stringify({
+				teamRed: team_Red,
+				teamBlue: team_Blue
+			}),
+		}).then(response => {console.log(response,"????????????????????")})
+		console.log("does this work??");
+}
 	postChartoDB(charName, charAttr) {
 		// $.ajax({
 		// 	url: '/api/NewChar',
@@ -96,14 +110,6 @@ class App extends Component {
 			this.getData();
 			console.log(response);
 		});
-	}
-	handleClickCard = (event) => {
-	// if(event.style.backgroundColor === '#ccc'){
- //   		 event.style.backgroundColor = 'coral';
- // 	}else{
-	//  	event.style.backgroundColor = '#ccc';
-	//  }
-        console.log(event);
 	}
 
 	render() {
@@ -136,14 +142,18 @@ class App extends Component {
 								/>
 							)}
 						/>
-						<Route exact path="/AllChar" component={AllCharacter} />
+						<Route exact path="/AllChar" 
+							render={() => (
+								<SelectableCharacters
+								content={charNames}
+							  postBattletoDB={this.postBattletoDB}
+								/>
+								)}
+							/>
 						<Route exact path="/CurBattle" component={CurrentBattle} />
 					</div>
 				</Router>
 				<h2>{this.state.message}</h2>
-				<h1>
-					{charNames.map(x => <AllCharacters message={x} key={x.id} onClick={(x) => this.handleClickCard(x)} />)}
-				</h1>
 			</div>
 		);
 	}

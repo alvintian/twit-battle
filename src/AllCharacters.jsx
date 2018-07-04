@@ -39,16 +39,13 @@ class AllCharacters extends Component {
 		let profile = ( 
 			<div
 				className="border"
-				title="profile"
 				onClick={() => {
 					this.props.onClick(message);
 					this.setState(prevState => {
-						console.log('clicked');
 						return {active: !prevState.active}
 					})
 				}}
-				style={style}
-			>
+				style={style}>
 				<h4>{message.name}</h4>
 				<li>HP: {message.hp}</li>
 				<li>ATT: {message.attack}</li>

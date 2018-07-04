@@ -35,18 +35,18 @@ module.exports = function(knex) {
 		bearer_token: twitter_bearer_token,
 	});
 
-	var params = { screen_name: 'nodejs' };
+	// var params = { screen_name: 'nodejs' };
 
 	router.get('/message', (req, res) => {
-		client.get('users/show', params, function(error, tweets, response) {
-			if (error) {
-				console.log(error);
-			}
+		// client.get('users/show', params, function(error, tweets, response) {
+		// 	if (error) {
+		// 		console.log(error);
+		// 	}
 
-			if (!error) {
-				console.log(tweets);
-			}
-		});
+		// 	if (!error) {
+		// 		console.log(tweets);
+		// 	}
+		// });
 		knex
 			.select('*')
 			.from('users')
@@ -74,12 +74,12 @@ module.exports = function(knex) {
 				res.json(results);
 			});
 	});
-	router.get('/battle', (req, res) => {
+	router.get('/CurBattle', (req, res) => {
 		knex
 			.select('*')
 			.from('battle')
 			.then(results => {
-				console.log(results);
+				console.log(results,"pppppppppppppppppppppppp");
 				res.json(results);
 			});
 	});
@@ -123,7 +123,7 @@ module.exports = function(knex) {
 				.insert({
 					name: req.body.character,
 					hp: 100,
-					attack: 5,
+					attack: 5
 				})
 				.then(results => {
 					console.log(results);
@@ -146,12 +146,12 @@ module.exports = function(knex) {
 		// return res.status(200).json(polls);
 	});
 
-	router.post('/battle', (req, res) => {
+	router.post('/CurBattle', (req, res) => {
 		knex('battle')
 			.insert([
 				{
-					red_side_name: redName,
-					blue_side_name: blueName,
+					red_side_name: teamRed,
+					blue_side_name: teamBlue
 				},
 			])
 			.then(results => {
