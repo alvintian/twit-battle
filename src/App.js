@@ -6,12 +6,13 @@ import CurrentBattle from './CurrentBattle.jsx';
 import SelectableCharacters from './SelectableCharacters.jsx';
 import {
 	NavLink,
+	Switch,
 	Route,
 	Link,
 	BrowserRouter as Router,
 } from 'react-router-dom';
-
-const Twitterwars = require('./images/twiterwars.svg');
+import BattleScreen from './BattleScreen.jsx';
+import Twitterwars from './images/twitterwars.png';
 const Home = () => (
 	<div>
 		<p>Home</p>
@@ -91,10 +92,7 @@ class App extends Component {
 				teamRed: team_Red,
 				teamBlue: team_Blue,
 			}),
-		}).then(response => {
-			console.log(response, '????????????????????');
 		});
-		console.log('does this work??');
 	}
 	postChartoDB(charName, charAttr) {
 		// $.ajax({
@@ -126,7 +124,6 @@ class App extends Component {
 
 	render() {
 		let charNames = this.state.charNames;
-		console.log(charNames, "what's in charNames?");
 		return (
 			<div className="App">
 				<Router>

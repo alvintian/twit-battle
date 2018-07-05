@@ -75,14 +75,15 @@ module.exports = function(knex) {
 	});
 	router.get('/CurBattle', (req, res) => {
 //		 select users.* from users join battle ON (active=true AND (battle.red_side_id=users.id or battle.blue_side_id=users.id));
+//
 		knex
-		.select('users.*')
+		.select('battle.id AS BATTLEID','red_side_id_fk','blue_side_id_fk','users.id','users.name')
 		.from('users')
 		.join('battle',function() {
  		 this.on('battle.red_side_id_fk','=','users.id').orOn('battle.blue_side_id_fk','=','users.id')
-			console.log("test2")
  		})
  		.where('active','=',true)
+ 		.orderBy('BATTLEID')
 // 		 this.on(function() {this.on('active','=',true)this.orOn(battle.red_side_id=users.id)this.orOn(battle.blue_side_id=users.id)})})
 			.then(results => {
 				console.log(results);
@@ -90,7 +91,8 @@ module.exports = function(knex) {
 //				res.json(results.rows);
 			});
 	});
-	router.get('/battle/:id', (req, res) => {
+	router.get('/CurBattle/:id', (req, res) => {
+console.log(req.params,"what is parmasID?????");
 		knex
 			.select('id')
 			.from('battle')
