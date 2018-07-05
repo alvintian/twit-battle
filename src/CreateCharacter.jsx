@@ -57,7 +57,6 @@ class CreateCharacter extends Component {
 					onKeyUp={this.handleEnterPressed}
 					placeholder="Enter New Character's name"
 				/>
-				<h4>{this.props.content}</h4>
 			</div>
 		);
 	}

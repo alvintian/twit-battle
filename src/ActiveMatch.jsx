@@ -10,7 +10,8 @@ class ActiveMatch extends Component {
 			active: false
 			};
 	}
-
+handleBattleStart=() => {
+}
 		// fetch('/api/message')
 		//   .then(response => response.json())
 		//   .then(json => this.setState({ message: json[0].name }));
@@ -21,6 +22,7 @@ class ActiveMatch extends Component {
 				// 		return {active: !prevState.active}
 				// 	})
 				// }}
+
 	render() {
 		const { match } = this.props;
 		    if (this.state.active === true) {
@@ -35,6 +37,8 @@ class ActiveMatch extends Component {
 		let profile = ( 
 				<div
 					onClick={() => {
+		    	this.props.matchInfo(match);
+
 					this.setState(prevState => {
 					return {active: !prevState.active}
 					})

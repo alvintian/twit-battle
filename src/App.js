@@ -46,9 +46,10 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			message: '',
 			charNames: [],
+			matchState: {}
 		};
+		this.matchInfo=this.matchInfo.bind(this);
 		this.postBattletoDB = this.postBattletoDB.bind(this);
 		this.postChartoDB = this.postChartoDB.bind(this);
 		// this.handleClickCard=this.handleClickCard.bind(this);
@@ -57,18 +58,24 @@ class App extends Component {
 	getData = () => {
 		$.get('/api/message', data => {
 			this.setState({
-				message: data[0].name,
 				charNames: data,
 			});
 		});
 	};
-
+	matchInfo(match){
+console.log(match,typeof(match),"what is match?")
+		if(typeof(match)==="object"){
+			this.setState({
+				matchState: match
+			});
+		}}
 	componentDidMount() {
 		// fetch('/api/message')
 		//   .then(response => response.json())
 		//   .then(json => this.setState({ message: json[0].name }));
 		this.getData();
 	}
+
 	postBattletoDB(team_Red, team_Blue) {
 		fetch('/api/CurBattle', {
 			method: 'post',
@@ -113,6 +120,7 @@ class App extends Component {
 
 	render() {
 		let charNames = this.state.charNames;
+		let matchState = this.state.matchState;
 		return (
 			<div className="App">
 				<Router>
@@ -137,7 +145,6 @@ class App extends Component {
 								path="/NewChar"
 								render={() => (
 									<CreateCharacter
-										content={this.state.message}
 										postChartoDB={this.postChartoDB}
 									/>
 								)}
@@ -154,9 +161,12 @@ class App extends Component {
 							/>
 						  	<Route exact path={"/CurBattle/:id"}
 									render={() => (
-							<BattleScreen content={charNames}/>
+							<BattleScreen content={matchState}/>
 								)}/>
-							<Route exact path="/CurBattle" component={CurrentBattle} />
+							<Route exact path="/CurBattle" 
+									render={() => (
+							<CurrentBattle matchInfo={this.matchInfo}/>
+								)} />
 							<Route exact path="/BattleScreen" component={BattleScreen} />
 						</Switch>
 					</div>
