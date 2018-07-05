@@ -13,7 +13,6 @@ class ActiveMatch extends Component {
 	}
 		onItemClick = (event) => {
 	}
-
 				// 	onClick={() => {
 				// 		this.props.onClick(match);
 				// 		this.setState(prevState => {
@@ -29,17 +28,16 @@ class ActiveMatch extends Component {
 		}
 		let profile = ( 
 				<Router><div>
-			<Link to="/BattleScreen" 
-					className="matchBorder"
-
+			<Link to="/CurBattle/" 
+				className="matchBorder"
 				style={style}>
 			<h4 className="matchRedSide">RED SIDE:{match.red_name}</h4>
 			<h3 className="matchId">Match #{match.BATTLEID}</h3>
 			<h4 className="matchBlueSide">BLUE SIDE:{match.blue_name}</h4>
 			</Link>
-					<Route	exact path="/BattleScreen"
+					<Route  path="/CurBattle/:id"
 							render={() => (
-					<BattleScreen content={this.state.match}/>
+					<BattleScreen content={match}/>
 					)}
 						/></div></Router>
 		);
