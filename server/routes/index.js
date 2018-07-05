@@ -84,7 +84,6 @@ module.exports = function(knex) {
  		})
  		.where('active','=',true)
  		.orderBy('BATTLEID')
-// 		 this.on(function() {this.on('active','=',true)this.orOn(battle.red_side_id=users.id)this.orOn(battle.blue_side_id=users.id)})})
 			.then(results => {
 				console.log(results);
 				res.json(results);

@@ -152,6 +152,10 @@ class App extends Component {
 									/>
 								)}
 							/>
+						  	<Route exact path={"/CurBattle/:id"}
+									render={() => (
+							<BattleScreen content={charNames}/>
+								)}/>
 							<Route exact path="/CurBattle" component={CurrentBattle} />
 							<Route exact path="/BattleScreen" component={BattleScreen} />
 						</Switch>
