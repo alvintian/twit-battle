@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import './App.css';
+
 // import Message from "./Message.jsx";
 
 class CreateCharacter extends Component {
@@ -42,23 +44,31 @@ class CreateCharacter extends Component {
 	render() {
 		return (
 			<div>
-				<h2>new characters all goes in here</h2>
-				<input
-					className=""
-					value={this.state.twitterName}
-					onChange={this.handleTwitNameChange}
-					onKeyUp={this.handleEnterPressed}
-					placeholder="Enter that person's twitter handle"
-				/>
-				<br />
-				<input
-					className=""
-					value={this.state.newName}
-					onChange={this.handleChange}
-					onKeyUp={this.handleEnterPressed}
-					placeholder="Enter New Character's name"
-				/>
-				<h4>{this.props.content}</h4>
+				<h2>Create Your Character!</h2>
+				<div className="makechar">
+					<div>
+						<h4>Twitter Character</h4>
+						<input
+							className=""
+							value={this.state.twitterName}
+							onChange={this.handleTwitNameChange}
+							onKeyUp={this.handleEnterPressed}
+							type="text"
+							placeholder="Enter that person's twitter handle"
+						/>
+					</div>
+					<div>
+						<h4>Base Character</h4>
+						<input
+							type="text"
+							className=""
+							value={this.state.newName}
+							onChange={this.handleChange}
+							onKeyUp={this.handleEnterPressed}
+							placeholder="Enter New Character's name"
+						/>
+					</div>
+				</div>
 			</div>
 		);
 	}

@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import $ from 'jquery';
 import CreateCharacter from './CreateCharacter.jsx';
 import CurrentBattle from './CurrentBattle.jsx';
 import SelectableCharacters from './SelectableCharacters.jsx';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import {
+	NavLink,
+	Route,
+	Link,
+	BrowserRouter as Router,
+} from 'react-router-dom';
 
+const Twitterwars = require('./images/twiterwars.svg');
 const Home = () => (
 	<div>
-		<h2>Homes</h2>
+		<p>Home</p>
+		<div className="create-char-button">
+			<Link to="/NewChar">Create Character</Link>
+		</div>
+
+		<button>View Battles</button>
 	</div>
 );
 
@@ -69,7 +79,7 @@ class App extends Component {
 		//   .then(json => this.setState({ message: json[0].name }));
 		this.getData();
 	}
-postBattletoDB(team_Red,team_Blue){
+	postBattletoDB(team_Red, team_Blue) {
 		fetch('/api/CurBattle', {
 			method: 'post',
 			headers: {
@@ -79,11 +89,13 @@ postBattletoDB(team_Red,team_Blue){
 			//make sure to serialize your JSON body
 			body: JSON.stringify({
 				teamRed: team_Red,
-				teamBlue: team_Blue
+				teamBlue: team_Blue,
 			}),
-		}).then(response => {console.log(response,"????????????????????")})
-		console.log("does this work??");
-}
+		}).then(response => {
+			console.log(response, '????????????????????');
+		});
+		console.log('does this work??');
+	}
 	postChartoDB(charName, charAttr) {
 		// $.ajax({
 		// 	url: '/api/NewChar',
@@ -119,18 +131,48 @@ postBattletoDB(team_Red,team_Blue){
 			<div className="App">
 				<Router>
 					<div>
-						<li>
-							<Link to="/">Home</Link>
-						</li>
-						<li>
-							<Link to="/NewChar">Create Character</Link>
-						</li>
-						<li>
-							<Link to="/AllChar">All Characters</Link>
-						</li>
-						<li>
-							<Link to="/CurBattle">Show Current Battle</Link>
-						</li>
+						<nav>
+							<div className="logo">
+								<img
+									src={Twitterwars}
+									style={{ width: '50px', height: '50px' }}
+								/>
+							</div>
+							<li>
+								<NavLink
+									activeClassName="is-active"
+									style={{ textDecoration: 'none', color: '#Efedef' }}
+									to="/">
+									Home
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									activeStyle={{ color: 'red' }}
+									style={{ textDecoration: 'none', color: '#Efedef' }}
+									to="/NewChar">
+									Create Character
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									activeStyle={{ color: 'red' }}
+									style={{ textDecoration: 'none', color: '#Efedef' }}
+									to="/AllChar">
+									All Characters
+								</NavLink>
+							</li>
+							<li>
+								{
+									<NavLink
+										activeStyle={{ color: 'red' }}
+										style={{ textDecoration: 'none', color: '#Efedef' }}
+										to="/CurBattle">
+										Show Current Battle
+									</NavLink>
+								}
+							</li>
+						</nav>
 						<Route exact path="/" component={Home} />
 						<Route
 							exact
@@ -142,14 +184,16 @@ postBattletoDB(team_Red,team_Blue){
 								/>
 							)}
 						/>
-						<Route exact path="/AllChar" 
+						<Route
+							exact
+							path="/AllChar"
 							render={() => (
 								<SelectableCharacters
-								content={charNames}
-							  postBattletoDB={this.postBattletoDB}
+									content={charNames}
+									postBattletoDB={this.postBattletoDB}
 								/>
-								)}
-							/>
+							)}
+						/>
 						<Route exact path="/CurBattle" component={CurrentBattle} />
 					</div>
 				</Router>
