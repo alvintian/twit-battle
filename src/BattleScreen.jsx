@@ -8,7 +8,7 @@ class BattleScreen extends Component {
 
 	render() {
 		const { data } = this.props;
-		return <div>TEST!</div>;
+		return <div>{data}TEST!</div>;
 	}
 }
 

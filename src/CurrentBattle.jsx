@@ -3,7 +3,6 @@ import $ from 'jquery';
 // import Message from "./Message.jsx";
 import './App.css';
 import ActiveMatch from './ActiveMatch.jsx'
-import BattleScreen from './BattleScreen.jsx'
 
 class CurrentBattle extends Component {
 	constructor(props) {

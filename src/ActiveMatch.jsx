@@ -14,6 +14,12 @@ class ActiveMatch extends Component {
 		onItemClick = (event) => {
 	}
 
+				// 	onClick={() => {
+				// 		this.props.onClick(match);
+				// 		this.setState(prevState => {
+				// 		return {active: !prevState.active}
+				// 	})
+				// }}
 	render() {
 		const { match } = this.props;
 		const style = this.state.active ? {
@@ -22,15 +28,10 @@ class ActiveMatch extends Component {
 			backgroundColor: 'red'
 		}
 		let profile = ( 
-			<div>
-			<Link 	to="/BattleScreen" 
+				<Router><div>
+			<Link to="/BattleScreen" 
 					className="matchBorder"
-					onClick={() => {
-						this.props.onClick(match);
-						this.setState(prevState => {
-						return {active: !prevState.active}
-					})
-				}}
+
 				style={style}>
 			<h4 className="matchRedSide">RED SIDE:{match.red_name}</h4>
 			<h3 className="matchId">Match #{match.BATTLEID}</h3>
@@ -40,7 +41,7 @@ class ActiveMatch extends Component {
 							render={() => (
 					<BattleScreen content={this.state.match}/>
 					)}
-						/></div>
+						/></div></Router>
 		);
 		// let profileAttr=document.getElementsByClassName("border");
 		// profileAttr.style.height = "250px";
