@@ -5,8 +5,8 @@ import $ from 'jquery';
 import CreateCharacter from './CreateCharacter.jsx';
 import CurrentBattle from './CurrentBattle.jsx';
 import SelectableCharacters from './SelectableCharacters.jsx';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-
+import { Switch, Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import BattleScreen from './BattleScreen.jsx';
 const Home = () => (
 	<div>
 		<h2>Homes</h2>
@@ -69,7 +69,7 @@ class App extends Component {
 		//   .then(json => this.setState({ message: json[0].name }));
 		this.getData();
 	}
-postBattletoDB(team_Red,team_Blue){
+	postBattletoDB(team_Red, team_Blue) {
 		fetch('/api/CurBattle', {
 			method: 'post',
 			headers: {
@@ -79,10 +79,10 @@ postBattletoDB(team_Red,team_Blue){
 			//make sure to serialize your JSON body
 			body: JSON.stringify({
 				teamRed: team_Red,
-				teamBlue: team_Blue
+				teamBlue: team_Blue,
 			}),
-		})
-}
+		});
+	}
 	postChartoDB(charName, charAttr) {
 		// $.ajax({
 		// 	url: '/api/NewChar',
@@ -129,26 +129,32 @@ postBattletoDB(team_Red,team_Blue){
 						<li>
 							<Link to="/CurBattle">Show Current Battle</Link>
 						</li>
-						<Route exact path="/" component={Home} />
-						<Route
-							exact
-							path="/NewChar"
-							render={() => (
-								<CreateCharacter
-									content={this.state.message}
-									postChartoDB={this.postChartoDB}
-								/>
-							)}
-						/>
-						<Route exact path="/AllChar" 
-							render={() => (
-								<SelectableCharacters
-								content={charNames}
-							  postBattletoDB={this.postBattletoDB}
-								/>
+
+						<Switch>
+							<Route exact path="/" component={Home} />
+							<Route
+								exact
+								path="/NewChar"
+								render={() => (
+									<CreateCharacter
+										content={this.state.message}
+										postChartoDB={this.postChartoDB}
+									/>
 								)}
 							/>
-						<Route exact path="/CurBattle" component={CurrentBattle} />
+							<Route
+								exact
+								path="/AllChar"
+								render={() => (
+									<SelectableCharacters
+										content={charNames}
+										postBattletoDB={this.postBattletoDB}
+									/>
+								)}
+							/>
+							<Route exact path="/CurBattle" component={CurrentBattle} />
+							<Route exact path="/BattleScreen" component={BattleScreen} />
+						</Switch>
 					</div>
 				</Router>
 			</div>
