@@ -32,13 +32,16 @@ class AllCharacters extends Component {
 	render() {
 		const { message } = this.props;
 		const style = this.state.active ? {
-			backgroundColor: 'blue'
+			backgroundColor: '#1D43E1',
+
 		} : {
-			backgroundColor: 'white'
+			backgroundColor: '#57609E',
+			
 		}
 		let profile = ( 
 			<div
 				className="border"
+
 				onClick={() => {
 					this.props.onClick(message);
 					this.setState(prevState => {

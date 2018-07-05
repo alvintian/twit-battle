@@ -1,18 +1,25 @@
 html {
   box-sizing: border-box;
-  color: #ffffff;
+  color: #A1A5BE;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
 .App {
   text-align: center;
-  background-color: #23272A;
+  background-color: #141A49;
   width: 100vw;
   height: 100vh;
 
 }
 
+.heading-font {
+  
+  font-size: 36px;
+    font-weight: 700;
+    line-height: 44px;
+    margin: 0;
+}
 
 .App-header {
   background-color: #222;
@@ -78,6 +85,8 @@ float:right;
 }
 
 .makechar > div {
+  box-shadow: 0 2px 2px 0;
+  border-radius: 5px;
   background-color: #f1f1f1;
   width: 40%;
   margin: 10px;
@@ -90,7 +99,12 @@ input[type=text] {
   width: 80%;
   padding: 12px 20px;
   margin: 8px 0;
-  box-sizing: border-box;
+  border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    box-sizing: border-box;
+    transition: background-color .15s ease,border .15s ease;
+    width: 100%;
 }
 
 nav {

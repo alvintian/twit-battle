@@ -43,8 +43,8 @@ class CreateCharacter extends Component {
 			<div>
 				<h2>Create Your Character!</h2>
 				<div className="makechar">
-					<div>
-						<h4>Twitter Character</h4>
+					<div style={{ backgroundColor: '#1DA1F2' }}>
+						<h4 style={{ color: '#CCEEFF' }}>Twitter Character</h4>
 						<input
 							className=""
 							value={this.state.twitterName}
