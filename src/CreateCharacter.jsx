@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 // import Message from "./Message.jsx";
 
 class CreateCharacter extends Component {

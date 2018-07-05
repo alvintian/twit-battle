@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import AllCharacters from './AllCharacters.jsx';
 
 // import Message from "./Message.jsx";

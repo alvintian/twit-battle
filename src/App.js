@@ -81,8 +81,7 @@ postBattletoDB(team_Red,team_Blue){
 				teamRed: team_Red,
 				teamBlue: team_Blue
 			}),
-		}).then(response => {console.log(response,"????????????????????")})
-		console.log("does this work??");
+		})
 }
 	postChartoDB(charName, charAttr) {
 		// $.ajax({
@@ -114,7 +113,6 @@ postBattletoDB(team_Red,team_Blue){
 
 	render() {
 		let charNames = this.state.charNames;
-		console.log(charNames, "what's in charNames?");
 		return (
 			<div className="App">
 				<Router>
