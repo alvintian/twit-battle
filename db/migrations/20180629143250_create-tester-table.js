@@ -11,8 +11,8 @@ exports.up = function(knex, Promise) {
 		return knex.schema.createTable('users', table => {
 			table.increments('id').primary()
 			table.string('name')
-			table.decimal('hp')
-			table.decimal('attack')
+			table.integer('hp')
+			table.integer('attack')
 			table.integer('votes')
 			table.boolean('eliminated')
 			table.integer('matches')

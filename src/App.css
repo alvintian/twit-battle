@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
   color: #A1A5BE;
+ 
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -8,8 +9,8 @@ html {
 .App {
   text-align: center;
   background-color: #141A49;
-  width: 100vw;
-  height: 100vh;
+  
+  min-width:100%; min-height:100%; width:auto; height:auto;  
 
 }
 
@@ -51,12 +52,54 @@ li {
 
 .matchBorder{
     display: block;
-    border: 4px solid;
-    border-color:blue;
-    margin: 4px;
-    background-color: tomato;
-    clear:both;
+    border: 2px solid;
+    border: 2px solid #30415D;
+    margin: 10px;
+    background-color: rgb(68, 82, 138),
+    
 }
+
+.redSide {
+ 
+  background-Color: red;
+  width: 40%;
+      
+								
+}
+
+.arrow {
+  border-style: dashed;
+  border-color: transparent;
+  border-width: 0.20em;
+  display: -moz-inline-box;
+  display: inline-block;
+  /* Use font-size to control the size of the arrow. */
+  font-size: 100px;
+  height: 0;
+  line-height: 0;
+  position: relative;
+  width: 0; 
+  border-left-width: 0.2em;
+  border-left-style: solid;
+  border-left-color: #222;
+  left:0.25em;
+}
+
+.matchID {
+
+}
+
+
+.blueSide {
+ 
+  background-Color: blue;
+  width: 4;
+  overflow: auto;
+
+								
+}
+
+
 .matchBorder .matchId{
   display: inline-block;
   text-align: center;
@@ -104,7 +147,6 @@ input[type=text] {
     border-width: 1px;
     box-sizing: border-box;
     transition: background-color .15s ease,border .15s ease;
-    width: 100%;
 }
 
 nav {

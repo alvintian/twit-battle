@@ -58,9 +58,9 @@ class App extends Component {
 		super();
 		this.state = {
 			charNames: [],
-			matchState: {}
+			matchState: {},
 		};
-		this.matchInfo=this.matchInfo.bind(this);
+		this.matchInfo = this.matchInfo.bind(this);
 		this.postBattletoDB = this.postBattletoDB.bind(this);
 		this.postChartoDB = this.postChartoDB.bind(this);
 		// this.handleClickCard=this.handleClickCard.bind(this);
@@ -73,13 +73,14 @@ class App extends Component {
 			});
 		});
 	};
-	matchInfo(match){
-console.log(match,typeof(match),"what is match?")
-		if(typeof(match)==="object"){
+	matchInfo(match) {
+		console.log(match, typeof match, 'what is match?');
+		if (typeof match === 'object') {
 			this.setState({
-				matchState: match
+				matchState: match,
 			});
-		}}
+		}
+	}
 	componentDidMount() {
 		// fetch('/api/message')
 		//   .then(response => response.json())
@@ -135,8 +136,11 @@ console.log(match,typeof(match),"what is match?")
 		return (
 			<div className="App">
 				<Router>
-					<div>
-<<<<<<< HEAD
+					<div
+						style={{
+							height: '100vh',
+							minHeight: '100vh',
+						}}>
 						<nav>
 							<div className="logo">
 								<img
@@ -200,53 +204,18 @@ console.log(match,typeof(match),"what is match?")
 								/>
 							)}
 						/>
-						<Route exact path="/CurBattle" component={CurrentBattle} />
-=======
-						<li>
-							<Link to="/">Home</Link>
-						</li>
-						<li>
-							<Link to="/NewChar">Create Character</Link>
-						</li>
-						<li>
-							<Link to="/AllChar">All Characters</Link>
-						</li>
-						<li>
-							<Link to="/CurBattle">Show Current Battle</Link>
-						</li>
 
-						<Switch>
-							<Route exact path="/" component={Home} />
-							<Route
-								exact
-								path="/NewChar"
-								render={() => (
-									<CreateCharacter
-										postChartoDB={this.postChartoDB}
-									/>
-								)}
-							/>
-							<Route
-								exact
-								path="/AllChar"
-								render={() => (
-									<SelectableCharacters
-										content={charNames}
-										postBattletoDB={this.postBattletoDB}
-									/>
-								)}
-							/>
-						  	<Route exact path={"/CurBattle/:id"}
-									render={() => (
-							<BattleScreen content={matchState}/>
-								)}/>
-							<Route exact path="/CurBattle" 
-									render={() => (
-							<CurrentBattle matchInfo={this.matchInfo}/>
-								)} />
-							<Route exact path="/BattleScreen" component={BattleScreen} />
-						</Switch>
->>>>>>> 5bc623f650a415532c9c86cf126f3328ebfe7d28
+						<Route
+							exact
+							path={'/CurBattle/:id'}
+							render={() => <BattleScreen content={matchState} />}
+						/>
+						<Route
+							exact
+							path="/CurBattle"
+							render={() => <CurrentBattle matchInfo={this.matchInfo} />}
+						/>
+						<Route exact path="/BattleScreen" component={BattleScreen} />
 					</div>
 				</Router>
 			</div>
