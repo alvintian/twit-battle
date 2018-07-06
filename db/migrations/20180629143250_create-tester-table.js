@@ -28,7 +28,7 @@ exports.up = function(knex, Promise) {
 			table.string('red_side_hp')
 			table.string('blue_side_hp')
 			table.boolean('active')
-			table.time('timer')
+			table.integer('timer')
 		})
 	};
 

@@ -89,7 +89,6 @@ module.exports = function(knex) {
 			});
 	});
 	router.get('/CurBattle/:id', (req, res) => {
-		console.log(req.params.id,"what is parmasID?????");
 		knex
 		.select('battle.id AS BATTLEID','red_side_id_fk','blue_side_id_fk','users.id','users.name','users.hp','users.attack')
 		.from('users')
@@ -101,6 +100,17 @@ module.exports = function(knex) {
 				res.json(results);
 			});
 	});
+
+	router.post('/CurBattle/:id', (req, res) => {
+		knex('battle')
+		.where('id','=',parseInt(req.body.id))
+		.update('active',false)
+		.then(results => {
+				res.json(results);
+			});
+	});
+
+
 
 	router.post('/NewChar', (req, res) => {
 		console.log(req.body.select, 'O or T');
