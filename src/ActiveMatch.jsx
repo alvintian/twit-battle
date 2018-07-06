@@ -22,6 +22,32 @@ handleBattleStart=() => {
 				// 		return {active: !prevState.active}
 				// 	})
 				// }}
+parseBattle=(x) =>{
+//zach's code great help!
+let battleObj = {}
+	x.forEach((battle) => {
+  // if battle doesn't already exist
+  if (!battleObj[battle.BATTLEID]) {
+    // add to battle object
+    battleObj[battle.BATTLEID] = {
+      BATTLEID: battle.BATTLEID
+    }
+  }
+  if (battle.id === battle.red_side_id_fk) {
+    battleObj[battle.BATTLEID].red_name = battle.name;
+    battleObj[battle.BATTLEID].red_hp=battle.hp;
+    battleObj[battle.BATTLEID].red_attack=battle.attack;
+  } else if(battle.id === battle.blue_side_id_fk){
+    battleObj[battle.BATTLEID].blue_name = battle.name;
+    battleObj[battle.BATTLEID].blue_hp = battle.hp;
+    battleObj[battle.BATTLEID].blue_attack = battle.attack;
+  }
+
+})
+	this.setState({
+		data: Object.values(battleObj)
+		});
+}
 
 	render() {
 		const { match } = this.props;
@@ -37,8 +63,7 @@ handleBattleStart=() => {
 		let profile = ( 
 				<div
 					onClick={() => {
-		    	this.props.matchInfo(match);
-
+		    		this.props.matchInfo(match);
 					this.setState(prevState => {
 					return {active: !prevState.active}
 					})

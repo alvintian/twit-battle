@@ -54,3 +54,13 @@ float:right;
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.battleStage{
+/*  background-size: 100%;
+*/    margin: auto;
+    position: relative;
+
+    width: 80%;
+    height:80%;
+    border: 3px solid green;
+    padding: 10px;
+}

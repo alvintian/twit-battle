@@ -62,13 +62,11 @@ class App extends Component {
 			});
 		});
 	};
-	matchInfo(match){
-console.log(match,typeof(match),"what is match?")
-		if(typeof(match)==="object"){
+	matchInfo(match){	
 			this.setState({
 				matchState: match
 			});
-		}}
+		}
 	componentDidMount() {
 		// fetch('/api/message')
 		//   .then(response => response.json())
@@ -114,7 +112,6 @@ console.log(match,typeof(match),"what is match?")
 			}),
 		}).then(response => {
 			this.getData();
-			console.log(response);
 		});
 	}
 
@@ -160,14 +157,13 @@ console.log(match,typeof(match),"what is match?")
 								)}
 							/>
 						  	<Route exact path={"/CurBattle/:id"}
-									render={() => (
-							<BattleScreen content={matchState}/>
+									render={({match}) => (
+							<BattleScreen content={matchState} id={match.params.id}/>
 								)}/>
 							<Route exact path="/CurBattle" 
 									render={() => (
 							<CurrentBattle matchInfo={this.matchInfo}/>
 								)} />
-							<Route exact path="/BattleScreen" component={BattleScreen} />
 						</Switch>
 					</div>
 				</Router>

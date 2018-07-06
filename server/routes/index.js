@@ -50,7 +50,6 @@ module.exports = function(knex) {
 			.select('*')
 			.from('users')
 			.then(results => {
-				console.log(results);
 				res.json(results);
 			});
 	});
@@ -59,7 +58,6 @@ module.exports = function(knex) {
 			.select('*')
 			.from('users')
 			.then(results => {
-				console.log(results);
 				res.json(results);
 			});
 	});
@@ -91,12 +89,15 @@ module.exports = function(knex) {
 			});
 	});
 	router.get('/CurBattle/:id', (req, res) => {
-		console.log(req.params,"what is parmasID?????");
+		console.log(req.params.id,"what is parmasID?????");
 		knex
-			.select('id')
-			.from('battle')
-			.then(results => {
-				console.log(results);
+		.select('battle.id AS BATTLEID','red_side_id_fk','blue_side_id_fk','users.id','users.name','users.hp','users.attack')
+		.from('users')
+		.join('battle',function() {
+ 		 this.on('battle.red_side_id_fk','=','users.id').orOn('battle.blue_side_id_fk','=','users.id')
+ 		})
+ 		.where('active','=',true).andWhere('battle.id','=',parseInt(req.params.id))
+		.then(results => {
 				res.json(results);
 			});
 	});
