@@ -17,6 +17,8 @@ class BattleScreen extends Component {
 			// 			hp:this.props.content.blue_hp,
 			// 		attack:this.props.content.blue_attack}
 		};
+//    this.props.onMessageSubmit(this.state.content)
+
 	fetch(`/api/CurBattle/${this.props.id}`)
 	.then(response => response.json())
 	.then(response => this.parseBattle(response))
@@ -68,9 +70,7 @@ blueStat: {blue_name: battle.name,
 
 })
 }
-
-    componentWillMount(){
-
+  componentWillMount(){
     }
 	componentDidMount() {
 	}

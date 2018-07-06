@@ -14,6 +14,7 @@ class SelectableCharacters extends Component {
 handleBattleStart=() => {
  	this.props.postBattletoDB(this.state.RedTeamCharId, this.state.BlueTeamCharId);
       console.log(this.state,"BATTLE START!");
+	this.props.onMatchStart("timer start");
 }
 	handleClickCard = (card) => {
 		if(this.state.RedTeamCharId === 0){

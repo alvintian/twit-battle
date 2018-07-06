@@ -5,7 +5,7 @@ const SocketServer = require('ws').Server;
 const uuidv1 = require('uuid/v1');
 
 // Set the port to 3001
-const PORT = 3001;
+const PORT = 3002;
 
 // Create a new express server
 const server = express()
@@ -36,12 +36,12 @@ wss.on('connection', (ws) => {
 //wss.broadcast(data);
   ws.on('message', function incoming(data) {
     data = JSON.parse(data);
-    data.id = uuidv1(data);
-    if (data.type === "postNotification") {
-      data.type = "incomingNotification";
-    } else {
-      data.type = "incomingMessage";
-    }
+    // data.id = uuidv1(data);
+    // if (data.type === "postNotification") {
+    //   data.type = "incomingNotification";
+    // } else {
+    //   data.type = "incomingMessage";
+    // }
     data = JSON.stringify(data);
     console.log(data, "data in websocket");
 //wss.broadcast(data);

@@ -68,10 +68,29 @@ class App extends Component {
 			});
 		}
 	componentDidMount() {
-		// fetch('/api/message')
-		//   .then(response => response.json())
-		//   .then(json => this.setState({ message: json[0].name }));
 		this.getData();
+		this.socket = new WebSocket("ws://localhost:3002/");
+		this.socket.addEventListener("message", event => {
+		// 	const responseMessage = JSON.parse(event.data);
+		// if(typeof(responseMessage)==='number'){
+		// 	console.log(responseMessage,"total users is a numb");
+		// return 	this.totalUsers(responseMessage);	
+		// }
+		//   switch(responseMessage.type) {
+  //     case "incomingMessage":
+  //       // handle incoming message
+  //     break;
+  //     case "incomingNotification":
+	 //        // handle incoming notification
+		//  responseMessage.content= responseMessage.oldname+" has changed their name to "+responseMessage.username;
+  //       break;
+  //     default:
+  //       // show an error in the console if the message type is unknown
+  //       throw new Error("Unknown event type " + responseMessage.type);
+		// 	}
+		// 	const messages = this.state.messages.concat(responseMessage);
+		// 	this.setState({messages: messages})
+		});
 	}
 
 	postBattletoDB(team_Red, team_Blue) {
@@ -104,7 +123,6 @@ class App extends Component {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
 			},
-
 			//make sure to serialize your JSON body
 			body: JSON.stringify({
 				character: charName,
@@ -113,6 +131,28 @@ class App extends Component {
 		}).then(response => {
 			this.getData();
 		});
+	}
+
+	handleMatchStart = content => {
+		// let message = {
+		// 	content: content
+		// }
+		// if(this.state.currentUser.name !== this.state.currentUser.newname){
+		// 	message.type="postNotification";
+		// 	message.username = this.state.currentUser.newname;
+		// 	message.oldname=this.state.currentUser.name;
+		// 	this.setState({
+		// 		currentUser: {
+		// 			name: this.state.currentUser.newname,
+		// 			newname: this.state.currentUser.newname,
+		// 		  color: this.state.currentUser.color
+		// 		}
+		// 	})
+		// } else{
+		// 	message.type="postMessage";
+		// 	message.username = this.state.currentUser.name;
+		// }
+		this.socket.send(JSON.stringify(content));
 	}
 
 	render() {
@@ -152,7 +192,8 @@ class App extends Component {
 								render={() => (
 									<SelectableCharacters
 										content={charNames}
-										postBattletoDB={this.postBattletoDB}
+										postBattletoDB={this.postBattletoDB} 
+										onMatchStart={this.handleMatchStart}
 									/>
 								)}
 							/>
