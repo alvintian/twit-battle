@@ -40,7 +40,13 @@ class CreateCharacter extends Component {
 	componentDidMount() {}
 	render() {
 		return (
-			<div>
+			<div
+				style={{
+					minHeight: '100%',
+					minWidth: '100%',
+					height: 'auto',
+					width: 'auto',
+				}}>
 				<h2>Create Your Character!</h2>
 				<div className="makechar">
 					<div style={{ backgroundColor: '#1DA1F2' }}>

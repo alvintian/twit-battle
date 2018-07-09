@@ -8,10 +8,14 @@ html {
 }
 .App {
   text-align: center;
-  background-color: #141A49;
-  
-  min-width:100%; min-height:100%; width:auto; height:auto;  
+  background-color: #141A49; 
 
+}
+
+body {
+  background-color: #141A49; 
+  height: 100%;
+  width: 100%;
 }
 
 .heading-font {
@@ -55,49 +59,38 @@ li {
     border: 2px solid;
     border: 2px solid #30415D;
     margin: 10px;
-    background-color: rgb(68, 82, 138),
+    background-color: rgb(68, 82, 138);
+    z-index: -2;
     
 }
 
 .redSide {
- 
-  background-Color: red;
-  width: 40%;
-      
-								
-}
-
-.arrow {
-  border-style: dashed;
-  border-color: transparent;
-  border-width: 0.20em;
-  display: -moz-inline-box;
-  display: inline-block;
-  /* Use font-size to control the size of the arrow. */
-  font-size: 100px;
-  height: 0;
-  line-height: 0;
-  position: relative;
-  width: 0; 
-  border-left-width: 0.2em;
-  border-left-style: solid;
-  border-left-color: #222;
-  left:0.25em;
-}
-
-.matchID {
+  background-color:#ba000d;
+  width: 49%;			
+  z-index: 1;
+  transform-origin: 0% 50%;
+  transform: perspective(300px) rotateX(-30deg);
 
 }
+  /* .redSide > * { transform: skew(20deg); } */
+
 
 
 .blueSide {
  
-  background-Color: blue;
-  width: 4;
+  background-Color: #002984;
+  width: 49%;
   overflow: auto;
+  height: 100%;
+
+
+  transform: perspective(300px) rotateX(30deg);
+  transform-origin: 100% 50%;
 
 								
 }
+
+/* .blueSide > * { transform: skew(20deg); } */
 
 
 .matchBorder .matchId{

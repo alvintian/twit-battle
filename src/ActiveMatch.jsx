@@ -38,32 +38,37 @@ class ActiveMatch extends Component {
 					overflow: 'auto',
 			  };
 		let profile = (
-			<div
-				onClick={() => {
-					this.props.matchInfo(match);
-
-					this.setState(prevState => {
-						return { active: !prevState.active };
-					});
-				}}
-				className="matchBorder"
-				style={style}>
+			<div>
+				<div className="matchID">
+					<h3>Match #{match.BATTLEID}</h3>
+				</div>
 				<div
-					style={{
-						display: 'flex',
-						justifyContent: 'space-between',
-						flexDirection: 'row',
-					}}>
-					<div className="redSide">
-						<h2>RED SIDE</h2>
-						<h4>{match.red_name}</h4>
-					</div>
+					onClick={() => {
+						this.props.matchInfo(match);
+
+						this.setState(prevState => {
+							return { active: !prevState.active };
+						});
+					}}
+					className="matchBorder"
+					style={style}>
 					<div className="matchID">
 						<h3>Match #{match.BATTLEID}</h3>
 					</div>
-					<div className="blueSide">
-						<h2>BLUE SIDE</h2>
-						<h4 style={{ textAlign: 'center ' }}>{match.blue_name}</h4>
+					<div
+						style={{
+							display: 'flex',
+							justifyContent: 'space-between',
+							flexDirection: 'row',
+						}}>
+						<div className="redSide">
+							<h2>RED SIDE</h2>
+							<h4>{match.red_name}</h4>
+						</div>
+						<div className="blueSide">
+							<h2>BLUE SIDE</h2>
+							<h4>{match.blue_name}</h4>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -19,7 +19,7 @@ const Home = () => (
 		<div className="create-char-button">
 			<Link to="/NewChar">Create Character</Link>
 		</div>
-
+		<img src={Twitterwars} style={{ width: '300px' }}/>
 		<button>View Battles</button>
 	</div>
 );
@@ -138,8 +138,10 @@ class App extends Component {
 				<Router>
 					<div
 						style={{
-							height: '100vh',
-							minHeight: '100vh',
+							minHeight: '100%',
+							minWidth: '100%',
+							height: 'auto',
+							width: 'auto',
 						}}>
 						<nav>
 							<div className="logo">
