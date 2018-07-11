@@ -180,18 +180,19 @@ module.exports = function(knex) {
 							attack: tweets.followers_count,
 							eliminated: false,
 							matches: 0,
-							picture: '/public/images/' + tweets.screen_name + fileExtension
+							picture: '/images/' + tweets.screen_name + fileExtension
 						}).then(results => {
 							res.json(results);
 						});
 				}
 			});
-		} else if (req.body.select === "") {
+		} else if (req.body.select === "O") {
+			let imagePath=req.files[0].path.replace("public", "")
 			knex('users')
 				.insert({
 					name: req.body.name,
 					description: req.body.desc,
-					picture: req.files[0].path,
+					picture: imagePath,
 					hp: 100,
 					attack: 5,
 					eliminated: false,

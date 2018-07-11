@@ -49,19 +49,22 @@ exports.up = function(knex, Promise) {
 				hp: 100,
 				attack: 15,
 				eliminated: false,
-				matches: 1
+				matches: 1,
+				picture: "/images/images.jpg"
 			}, {
-				name: "CoCo",
+				name: "David",
 				hp: 100,
 				attack: 5,
 				eliminated: true,
-				matches: 1
+				matches: 1,
+				picture:"/images/823552.jpg"
 			}, {
-				name: "BoBo",
+				name: "Juan",
 				hp: 100,
 				attack: 5,
 				eliminated: false,
-				matches: 0
+				matches: 0,
+				picture: "/images/juan.png"
 			}]),
 			knex('battle').insert([{
 				red_side_id_fk: 1,

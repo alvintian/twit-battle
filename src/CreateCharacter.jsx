@@ -16,7 +16,6 @@ class CreateCharacter extends Component {
 			inputLinkClicked: false,
 		};
 		this.fd = new FormData();
-
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -91,6 +90,7 @@ class CreateCharacter extends Component {
 		// })
 
 		this.fd.append('name', this.state.newName);
+				this.fd.append('select', "O");
 		this.fd.append('desc', this.state.newCharDescription);
 		fetch('/api/NewChar', {
 			method: 'POST',

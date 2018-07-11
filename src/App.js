@@ -84,6 +84,7 @@ class App extends Component {
 			charNames: [],
 			matchState: {},
 		};
+				this.getData();
 		this.matchInfo = this.matchInfo.bind(this);
 		this.postBattletoDB = this.postBattletoDB.bind(this);
 		this.postChartoDB = this.postChartoDB.bind(this);
@@ -103,7 +104,6 @@ class App extends Component {
 			});
 		}
 	componentDidMount() {
-		this.getData();
 		// this.socket = new WebSocket("ws://localhost:8080/");
 		// this.socket.addEventListener("message", event => {
 		// 	const responseMessage = JSON.parse(event.data);
@@ -164,8 +164,7 @@ class App extends Component {
 				select: charAttr,
 			}),
 		}).then(response => {
-			console.log(response.body,"twittername in props??")
-			this.getData();
+//			this.getData();
 		});
 	}
 

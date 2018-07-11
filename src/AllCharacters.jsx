@@ -49,6 +49,7 @@ class AllCharacters extends Component {
 				}}
 				style={style}>
 				<h1 style={{ color: 'white' }}>{message.name}</h1>
+				<img src={message.picture} alt=""></img>
 				<h2>HP: {message.hp}</h2>
 				<h2>ATT: {message.attack}</h2>
 			</div>
