@@ -268,6 +268,7 @@ class App extends Component {
 										content={charNames}
 										postBattletoDB={this.postBattletoDB} 
 										onMatchStart={this.handleMatchStart}
+										getData={this.getData}
 									/>
 								)}
 							/>

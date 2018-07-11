@@ -41,8 +41,8 @@ body {
   display: inline-block;
   border: 2px solid;
   margin: 2px;
-  width: 250px;
-  height: 300px;
+  width: 300px;
+  height: 350px;
   padding: 5px;
   overflow-wrap: break-word;
   overflow:hidden;
@@ -84,7 +84,10 @@ li {
   transform-origin: none
 }
 
-
+.opacity {
+  opacity: 0.5;
+  background-color: #111111;
+}
 
 .blueSide {
  
@@ -123,20 +126,27 @@ float:right;
   to { transform: rotate(360deg); }
 }
 
-.makechar {
+/* .makechar {
   
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 10px;
+  width: 50%;
   
-  
-}
+} */
 
-.makechar > div {
+/* .charcontainer {
+ margin: 0 auto;
+} */
+
+.char {
   box-shadow: 0 2px 2px 0;
   border-radius: 5px;
   background-color: #f1f1f1;
-  width: 40%;
+  /* width: 40%; */
   margin: 10px;
   text-align: center;
   line-height: 75px;
@@ -207,11 +217,12 @@ margin-right: 20%;
 .battleStage{
   /*  background-size: 100%;
   */    margin: auto;
-      position: relative;
+      /* position: relative; */
   
       width: 80%;
       height:80%;
-      border: 3px solid green;
+      border: 3px solid #111111;
+      background-color: #99AAB5;
       padding: 10px;
   }
   

@@ -53,7 +53,7 @@ exports.up = function(knex, Promise) {
 				description: "DoDo came from the BoBo kingdom, he seeks the Triforce",
 				picture: "/images/images.jpg"
 			}, {
-				name: "David",
+				name: "Mark",
 				hp: 100,
 				attack: 5,
 				eliminated: true,
@@ -61,7 +61,7 @@ exports.up = function(knex, Promise) {
 				description: "I know a lot about random things. I’ve been called Wikipedia Jones.",
 				picture:"/images/823552.jpg"
 			}, {
-				name: "Juan",
+				name: "Jeff",
 				hp: 100,
 				attack: 5,
 				eliminated: false,

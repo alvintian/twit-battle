@@ -32,7 +32,7 @@ tick(){
         var elapsed = Math.round(this.state.elapsed / 100);
         // This will give a number with one digit after the decimal dot (xx.x):
         var seconds = (elapsed / 10).toFixed(1);
-        console.log(seconds,"what is the second??")    
+        //console.log(seconds,"what is the second??")    
     return (<p>This example was started <b>{seconds} seconds</b> ago.</p>)
   }
     }

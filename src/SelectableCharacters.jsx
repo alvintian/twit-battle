@@ -14,9 +14,12 @@ class SelectableCharacters extends Component {
 		this.handleCreateBattle=this.handleCreateBattle.bind(this);
 		this.handlecancel=this.handlecancel.bind(this);
 	}
-handleBattleStart=() => {
- 	this.props.postBattletoDB(this.state.RedTeamCharId, this.state.BlueTeamCharId);
-      console.log(this.state,"BATTLE START!");
+	handleBattleStart = () => {
+		this.props.postBattletoDB(
+			this.state.RedTeamCharId,
+			this.state.BlueTeamCharId
+		);
+		console.log(this.state, 'BATTLE START!');
 		let webSocketData = {
 			type: "battleTimer"
 		// battleId: "Id" 
@@ -55,7 +58,9 @@ this.setState({
 		});	
 }
 
-	componentDidMount() {}
+	componentDidMount() {
+		this.props.getData();
+	}
 	render() {
 		let charNames = this.props.content;
 		return (

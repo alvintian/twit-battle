@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Twitter = require('twitter');
 const multer = require('multer');
-var fs = require("fs");
+var fs = require('fs');
 var request = require('request');
 
 const getBearerToken = require('get-twitter-bearer-token');
@@ -35,7 +35,7 @@ module.exports = function(knex) {
 			filename: function(req, file, next) {
 				const ext = file.mimetype.split('/')[1];
 				next(null, file.fieldname + '-' + Date.now() + '.' + ext);
-			}
+			},
 		}),
 		fileFilter: function(req, file, next) {
 			if (!file) {
@@ -45,13 +45,15 @@ module.exports = function(knex) {
 			if (image) {
 				next(null, true);
 			} else {
-				next({
-					message: "File type not supported"
-				}, false);
+				next(
+					{
+						message: 'File type not supported',
+					},
+					false
+				);
 			}
-		}
-	}
-
+		},
+	};
 
 	var client = new Twitter({
 		consumer_key: 'TwLpS2IZT9mzyCpd31C6f2Ykk',
@@ -110,10 +112,23 @@ module.exports = function(knex) {
 	router.get('/CurBattle', (req, res) => {
 		//		 select users.* from users join battle ON (active=true AND (battle.red_side_id=users.id or battle.blue_side_id=users.id));
 		knex
-			.select('battle.id AS BATTLEID', 'red_side_id_fk', 'blue_side_id_fk', 'users.id', 'users.name', 'users.hp', 'users.attack')
+			.select(
+				'battle.id AS BATTLEID',
+				'red_side_id_fk',
+				'blue_side_id_fk',
+				'users.id',
+				'users.name',
+				'users.hp',
+				'users.attack',
+				'users.picture'
+			)
 			.from('users')
 			.join('battle', function() {
-				this.on('battle.red_side_id_fk', '=', 'users.id').orOn('battle.blue_side_id_fk', '=', 'users.id')
+				this.on('battle.red_side_id_fk', '=', 'users.id').orOn(
+					'battle.blue_side_id_fk',
+					'=',
+					'users.id'
+				);
 			})
 			.where('active', '=', true)
 			.orderBy('BATTLEID')
@@ -125,12 +140,26 @@ module.exports = function(knex) {
 	});
 	router.get('/CurBattle/:id', (req, res) => {
 		knex
-			.select('battle.id AS BATTLEID', 'red_side_id_fk', 'blue_side_id_fk', 'users.id', 'users.name', 'users.hp', 'users.attack')
+			.select(
+				'battle.id AS BATTLEID',
+				'red_side_id_fk',
+				'blue_side_id_fk',
+				'users.id',
+				'users.name',
+				'users.hp',
+				'users.attack',
+				'users.picture'
+			)
 			.from('users')
 			.join('battle', function() {
-				this.on('battle.red_side_id_fk', '=', 'users.id').orOn('battle.blue_side_id_fk', '=', 'users.id')
+				this.on('battle.red_side_id_fk', '=', 'users.id').orOn(
+					'battle.blue_side_id_fk',
+					'=',
+					'users.id'
+				);
 			})
-			.where('active', '=', true).andWhere('battle.id', '=', parseInt(req.params.id))
+			.where('active', '=', true)
+			.andWhere('battle.id', '=', parseInt(req.params.id))
 			.then(results => {
 				res.json(results);
 			});
@@ -148,28 +177,31 @@ module.exports = function(knex) {
 	//	router.post('/NewChar', multer(multerConf).any(),(req, res) => {
 	router.post('/NewChar', multer(multerConf).any(), (req, res) => {
 		console.log(req.body, 'O or T');
-		console.log(req.file, "is file empty??");
-		console.log(req.files, "is files empty?");
+		console.log(req.file, 'is file empty??');
+		console.log(req.files, 'is files empty?');
 		// console.log(req.files[0].path, "is the data empty as well??")
 		if (req.body.select === 'Tp') {
 			let param = {
-				screen_name: req.body.character
+				screen_name: req.body.character,
 			};
 			client.get('users/show', param, function(error, tweets, response) {
 				if (error) {
-					console.log(error, "stopped at error");
+					console.log(error, 'stopped at error');
 					// if(typeof(tweets.statuses_count)===undefined){
 				}
 				if (!error) {
-					let twitterImage = tweets.profile_image_url.replace("normal", "400x400")
+					let twitterImage = tweets.profile_image_url.replace(
+						'normal',
+						'400x400'
+					);
 					return res.json({
-						"twitterImage": twitterImage
+						twitterImage: twitterImage,
 					});
 				}
-			})
+			});
 		} else if (req.body.select === 'T') {
 			let param = {
-				screen_name: req.body.character
+				screen_name: req.body.character,
 			};
 			client.get('users/show', param, function(error, tweets, response) {
 				if (error) {
@@ -177,24 +209,34 @@ module.exports = function(knex) {
 					// if(typeof(tweets.statuses_count)===undefined){
 				}
 				if (!error) {
-					let profile_image_url = tweets.profile_image_url.replace("normal", "400x400")
-					let fileExtension = "";
-					if (profile_image_url.substr(profile_image_url.length - 3) === "jpg") {
-						fileExtension = ".jpg";
+					let profile_image_url = tweets.profile_image_url.replace(
+						'normal',
+						'400x400'
+					);
+					let fileExtension = '';
+					if (
+						profile_image_url.substr(profile_image_url.length - 3) === 'jpg'
+					) {
+						fileExtension = '.jpg';
 					} else {
-						fileExtension = ".png";
+						fileExtension = '.png';
 					}
-					request(profile_image_url).pipe(fs.createWriteStream('./public/images/' + tweets.screen_name + fileExtension))
+					request(profile_image_url).pipe(
+						fs.createWriteStream(
+							'./public/images/' + tweets.screen_name + fileExtension
+						)
+					);
 					knex('users')
 						.insert({
 							name: req.body.character,
-							hp: tweets.statuses_count,
+							hp: tweets.followers_count,
 							description: tweets.description,
-							attack: tweets.followers_count,
+							attack: tweets.statuses_count,
 							eliminated: false,
 							matches: 0,
-							picture: '/images/' + tweets.screen_name + fileExtension
-						}).then(results => {
+							picture: '/images/' + tweets.screen_name + fileExtension,
+						})
+						.then(results => {
 							res.json(results);
 						});
 				}
@@ -209,11 +251,11 @@ module.exports = function(knex) {
 					hp: 100,
 					attack: 5,
 					eliminated: false,
-					matches: 0
-				}).then(results => {
+					matches: 0,
+				})
+				.then(results => {
 					res.json(results);
 				});
-
 		}
 		// 		let health=tweets.statuses_count;
 		// let attack=tweets.followers_count;
@@ -233,15 +275,60 @@ module.exports = function(knex) {
 
 	router.post('/CurBattle', (req, res) => {
 		knex('battle')
-			.insert([{
-				red_side_id_fk: req.body.teamRed,
-				blue_side_id_fk: req.body.teamBlue,
-				active: true
-			}, ])
+			.insert([
+				{
+					red_side_id_fk: req.body.teamRed,
+					blue_side_id_fk: req.body.teamBlue,
+					active: true,
+				},
+			])
 			.then(results => {
 				console.log(results);
 				res.json(results);
 			});
+	});
+	router.post('/updateChar', (req, res) => {
+		knex('users')
+			.where({ name: req.body.character || 'lol' })
+			.update({ eliminated: true })
+			.then(x => {
+				console.log('user', x);
+			});
+
+		knex('battle')
+			.where({ id: req.body.battleID || 0 })
+			.update({ active: false })
+			.then(x => {
+				console.log('battle update', x);
+				res.send('ok');
+			});
+
+		// knex('battle')
+		// 	.where({ id: req.body.battleID || 0 })
+		// 	.update({ active: false })
+		// 	.then(results => {
+		// 		console.log(results);
+		// 		//res.json(results);
+		// 	});
+		// knex
+		// 	.multiQuery([
+		// 		knex
+		// 			.update('users')
+		// 			.set({ eliminated: true })
+		// 			.where({ name: req.body.character }),
+		// 		knex
+		// 			.update('battle')
+		// 			.set({ active: false })
+		// 			.where({ id: req.body.battleID }),
+		// 	])
+		// 	.spread((resultA, resultB) => {
+		// 		console.log(resultA, resultB);
+		// 		res.send('ok')
+
+		// 	}).then(x => {
+		// 		console.log(x)
+
+		// 	})
 	});
 	return router;
 };
