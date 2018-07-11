@@ -11,15 +11,17 @@ class SelectableCharacters extends Component {
 			BlueTeamCharId: 0,
 		};
 	}
-	handleBattleStart = () => {
-		this.props.postBattletoDB(
-			this.state.RedTeamCharId,
-			this.state.BlueTeamCharId
-		);
-		console.log(this.state, 'BATTLE START!');
-	};
-	handleClickCard = card => {
-		if (this.state.RedTeamCharId === 0) {
+handleBattleStart=() => {
+ 	this.props.postBattletoDB(this.state.RedTeamCharId, this.state.BlueTeamCharId);
+      console.log(this.state,"BATTLE START!");
+		let webSocketData = {
+			type: "battleTimer"
+		// battleId: "Id" 
+		}
+	this.props.onMatchStart(webSocketData);
+}
+	handleClickCard = (card) => {
+		if(this.state.RedTeamCharId === 0){
 			this.setState({
 				RedTeamCharId: card.id,
 				BlueTeamCharId: this.state.BlueTeamCharId,

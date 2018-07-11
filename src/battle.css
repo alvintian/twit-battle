@@ -1,0 +1,10 @@
+.bluePlayer {
+    display: inline-block;
+float:right;
+
+}
+
+.redPlayer {
+    display: inline-block;
+float:left;
+}

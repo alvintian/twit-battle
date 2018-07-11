@@ -154,6 +154,17 @@ input[type=text] {
     transition: background-color .15s ease,border .15s ease;
 }
 
+textarea {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    box-sizing: border-box;
+    transition: background-color .15s ease,border .15s ease;
+}
+
 nav {
   display: flex;
   align-items: center;
@@ -193,5 +204,15 @@ margin-right: 20%;
 }
 
 
+.battleStage{
+  /*  background-size: 100%;
+  */    margin: auto;
+      position: relative;
+  
+      width: 80%;
+      height:80%;
+      border: 3px solid green;
+      padding: 10px;
+  }
   
 
