@@ -72,7 +72,7 @@ class ActiveMatch extends Component {
 					onClick={() => {
 						this.props.matchInfo(match);
 						this.setState(prevState => {
-							return { active: !prevState.active };
+						return { active: !prevState.active };
 						});
 					}}
 					className="matchBorder"

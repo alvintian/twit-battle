@@ -1,5 +1,10 @@
-import React, { Component } from 'react';
+import React, {
+	Component
+} from 'react';
 import './App.css';
+import {
+	Redirect
+} from 'react-router-dom';
 
 // import Message from "./Message.jsx";
 class AllCharacters extends Component {
@@ -8,8 +13,9 @@ class AllCharacters extends Component {
 		this.state = {
 			messages: this.props.ListMessage,
 			active: false,
-			//			id: this.props.key,
-			counter: 0,
+			createBattleClicked: this.props.createBattleClicked,
+			characterClicked: false,
+			counter: 0
 		};
 	}
 
@@ -29,22 +35,35 @@ class AllCharacters extends Component {
 		//  }
 	};
 
+
 	render() {
-		const { message } = this.props;
-		const style = this.state.active
-			? {
-					backgroundColor: '#1D43E1',
-			  }
-			: {
-					backgroundColor: '#57609E',
-			  };
+		const {
+			message
+		} = this.props;
+		const style = this.state.active ?
+			{
+				backgroundColor: '#1D43E1',
+			} :
+			{
+				backgroundColor: '#57609E',
+			};
+
+		if (this.props.createBattleClicked === false && this.state.characterClicked === true) {
+			//			console.log(this.props.characterClicked,"props or false??")
+			console.log(this.state.characterClicked, "state or false??")
+			return <Redirect to = {
+				'/AllChar/' + this.props.message.id
+			}
+			/>;
+		}
 		let profile = (
 			<div
 				className="border"
 				onClick={() => {
-					this.props.onClick(message);
+					this.props.onCharClick(message);
 					this.setState(prevState => {
-						return { active: !prevState.active };
+						return { active: !prevState.active,
+						characterClicked: this.props.createBattleClicked === false? !prevState.characterClicked:false };
 					});
 				}}
 				style={style}>

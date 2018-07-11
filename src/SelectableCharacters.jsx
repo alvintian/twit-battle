@@ -9,7 +9,10 @@ class SelectableCharacters extends Component {
 		this.state = {
 			RedTeamCharId: 0,
 			BlueTeamCharId: 0,
+			createBattleClicked: false,
 		};
+		this.handleCreateBattle=this.handleCreateBattle.bind(this);
+		this.handlecancel=this.handlecancel.bind(this);
 	}
 handleBattleStart=() => {
  	this.props.postBattletoDB(this.state.RedTeamCharId, this.state.BlueTeamCharId);
@@ -21,8 +24,12 @@ handleBattleStart=() => {
 	this.props.onMatchStart(webSocketData);
 }
 	handleClickCard = (card) => {
-		if(this.state.RedTeamCharId === 0){
-			this.setState({
+		console.log(this.state,"what is carddddddddddd");
+				// this.setState({
+				// 	characterClicked:true
+				// })
+			if(this.state.RedTeamCharId === 0){
+				this.setState({
 				RedTeamCharId: card.id,
 				BlueTeamCharId: this.state.BlueTeamCharId,
 			});
@@ -32,33 +39,55 @@ handleBattleStart=() => {
 				BlueTeamCharId: card.id,
 			});
 		}
-		console.log(this.state, 'what is the state?');
 	};
-	//      console.log(event.hp);
+
+
+handleCreateBattle() {
+this.setState({
+		createBattleClicked: true
+		});
+}
+handlecancel(){
+this.setState({
+		createBattleClicked: false,
+		RedTeamCharId: 0,
+		BlueTeamCharId: 0	
+		});	
+}
 
 	componentDidMount() {}
 	render() {
 		let charNames = this.props.content;
 		return (
 			<div>
-				<h3>Choose Your Battle Characters!</h3>
-
-				{charNames.map(x => (
-					<AllCharacters
-						message={x}
-						key={x.id}
-						onClick={x => this.handleClickCard(x)}
-					/>
-				))}
-				<div>
+				{this.state.createBattleClicked ? (
+				<div><h3>Choose Your Battle Characters!</h3>
+				 <button className="create-char-button"
+						 style={{ margin: '0 auto' }}
+						 onClick={this.handlecancel}>Cancel Battle</button>
 					<button
 						className="create-char-button"
 						style={{ margin: '0 auto' }}
 						type="button"
 						onClick={this.handleBattleStart}>
 						Submit
-					</button>
-				</div>
+					</button></div>
+				) : 
+				<div><h3>All Characters!</h3>
+					<button
+						style={{ margin: '0 auto' }}
+						onClick={this.handleCreateBattle}>
+						Create Battle
+					</button></div>}
+				{charNames.map(x => (
+					<AllCharacters
+						message={x}
+						key={x.id}
+						onCharClick={x => this.handleClickCard(x)}
+						createBattleClicked={this.state.createBattleClicked}
+					/>
+				))}
+
 			</div>
 		);
 	}

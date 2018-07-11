@@ -76,7 +76,7 @@ module.exports = function(knex) {
 				res.json(results);
 			});
 	});
-	router.get('/character', (req, res) => {
+	router.get('/AllChar', (req, res) => {
 		knex
 			.select('*')
 			.from('users')
@@ -84,15 +84,30 @@ module.exports = function(knex) {
 				res.json(results);
 			});
 	});
-	router.get('/character/:id', (req, res) => {
+	router.get('/AllChar/:id', (req, res) => {
 		//let user_id = req.session.;
 		knex
-			.select('id')
+			.select('users.*', 'battle.id AS BATTLEID', 'red_side_id_fk', 'blue_side_id_fk')
 			.from('users')
-			.then(results => {
-				console.log(results);
-				res.json(results);
-			});
+			.join('battle', function() {
+				this.on('battle.red_side_id_fk', '=', 'users.id').orOn('battle.blue_side_id_fk', '=', 'users.id')
+			})
+			.where('active', '=', false)//.andWhere('users.id', '=', parseInt(req.params.id))
+		.then(results => {
+			res.json(results);
+		})
+			// .returning('id')
+			//      .('poll').insert('req.body.question')
+			//    .then(response =>
+			//    		knex
+			// .select('*')
+			// .from('battle')
+			// .where('red_side_id_fk', '=', response[0]).orWhere('blue_side_id_fk', '=', response[0])
+			// .returning('id')
+			// .then(results => {
+			// 	res.json(results);
+			// })
+			// )
 	});
 	router.get('/CurBattle', (req, res) => {
 		//		 select users.* from users join battle ON (active=true AND (battle.red_side_id=users.id or battle.blue_side_id=users.id));
@@ -187,7 +202,7 @@ module.exports = function(knex) {
 				}
 			});
 		} else if (req.body.select === "O") {
-			let imagePath=req.files[0].path.replace("public", "")
+			let imagePath = req.files[0].path.replace("public", "")
 			knex('users')
 				.insert({
 					name: req.body.name,

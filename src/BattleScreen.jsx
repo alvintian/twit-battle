@@ -83,7 +83,7 @@ class BattleScreen extends Component {
 				<h3>
 					{' '}
 					{this.state.redStat.red_name}
-					VS {this.state.blueStat.blue_name}!{' '}
+					 VS {this.state.blueStat.blue_name}!{' '}
 				</h3>{' '}
 				<BattleTime start={Date.now()} /> <RedSide redP={redStat} />{' '}
 				<BlueSide blueP={blueStat} />{' '}

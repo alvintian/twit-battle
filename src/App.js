@@ -12,6 +12,7 @@ import {
 	BrowserRouter as Router,
 } from 'react-router-dom';
 import BattleScreen from './BattleScreen.jsx';
+import CharProfile from './CharProfile.jsx';
 import Twitterwars from './images/twitterwars.png';
 import TwitterwarsHome from './images/twiterwarshome.png';
 const Home = () => (
@@ -27,6 +28,7 @@ const Home = () => (
 				src={TwitterwarsHome}
 				width={'300px'}
 				style={{ marginTop: '20px' }}
+				alt=""
 			/>
 			<h1>Create Your Character!</h1>
 			<div className="create-char-button">
@@ -206,6 +208,7 @@ class App extends Component {
 						<nav>
 							<div className="logo">
 								<img
+									alt=""
 									src={Twitterwars}
 									style={{ width: '50px', height: '50px' }}
 								/>
@@ -270,7 +273,11 @@ class App extends Component {
 							/>
 						  	<Route exact path={"/CurBattle/:id"}
 									render={({match}) => (
-							<BattleScreen content={matchState} id={match.params.id}/>
+							<BattleScreen content={matchState} id={match.params.id} />
+								)}/>
+						  	<Route exact path={"/AllChar/:id"}
+									render={({match}) => (
+							<CharProfile content={matchState} id={match.params.id} />
 								)}/>
 							<Route exact path="/CurBattle" 
 									render={() => (

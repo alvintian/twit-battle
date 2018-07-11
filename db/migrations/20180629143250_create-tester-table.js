@@ -49,7 +49,8 @@ exports.up = function(knex, Promise) {
 				hp: 100,
 				attack: 15,
 				eliminated: false,
-				matches: 1,
+				matches: 2,
+				description: "DoDo came from the BoBo kingdom, he seeks the Triforce",
 				picture: "/images/images.jpg"
 			}, {
 				name: "David",
@@ -57,13 +58,15 @@ exports.up = function(knex, Promise) {
 				attack: 5,
 				eliminated: true,
 				matches: 1,
+				description: "I know a lot about random things. I’ve been called Wikipedia Jones.",
 				picture:"/images/823552.jpg"
 			}, {
 				name: "Juan",
 				hp: 100,
 				attack: 5,
 				eliminated: false,
-				matches: 0,
+				matches: 1,
+				description: "I went to Basic school, Pascal High School, did C as an undergrad, failed a VB master and after a couple of decades I have not given up on JS.",
 				picture: "/images/juan.png"
 			}]),
 			knex('battle').insert([{
@@ -72,7 +75,15 @@ exports.up = function(knex, Promise) {
 				red_side_hp: 14,
 				blue_side_hp: 0,
 				active:false
-			}])
+			},
+			{
+				red_side_id_fk: 1,
+				blue_side_id_fk: 3,
+				red_side_hp: 30,
+				blue_side_hp: 0,
+				active:false
+			}
+			])
 		])
 	};
 };
