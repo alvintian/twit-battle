@@ -158,7 +158,6 @@ class CreateCharacter extends Component {
 					style={{
 						display: 'flex',
 						flexDirection: 'row',
-						width: '80%',
 						justifyContent: 'center',
 						alignItems: 'center',
 					}}>
@@ -167,9 +166,10 @@ class CreateCharacter extends Component {
 							// className="makeChar"
 							style={{
 								backgroundColor: '#1DA1F2',
-								width: '100%',
+								width: '300px',
 								flex: '1',
 								padding: '1em',
+								height: '300px',
 							}}>
 							<h4 style={{ color: '#CCEEFF' }}>Twitter Character</h4>
 							<input
@@ -203,8 +203,10 @@ class CreateCharacter extends Component {
 							// className="makeChar"
 							style={{
 								backgroundColor: '#CCC',
+								width: '300px',
 								flex: '1',
 								padding: '1em',
+								height: '300px',
 							}}>
 							<h4 style={{ color: '#111111' }}>Base Character</h4>
 							<form onSubmit={this.handleSubmit}>
@@ -242,7 +244,7 @@ class CreateCharacter extends Component {
 									<input
 										type="submit"
 										value="Submit"
-										className="button is-primary"
+										className="create-char-button"
 									/>
 								</div>
 							</form>

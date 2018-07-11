@@ -4,6 +4,7 @@ import './App.css';
 import RedSide from './RedSide.jsx';
 import BlueSide from './BlueSide.jsx';
 import BattleTime from './BattleTime.jsx';
+import { ProgressBar } from 'react-bootstrap';
 class BattleScreen extends Component {
 	constructor(props) {
 		super(props);
@@ -83,7 +84,10 @@ class BattleScreen extends Component {
 		});
 	}
 	componentWillUnmount() {
-		if (this.state.redStat.attack > this.state.blueStat.attack) {
+		if (
+			this.state.redStat.attack - this.state.blueStat.hp >
+			this.state.blueStat.attack - this.state.redStat.hp
+		) {
 			fetch('/api/updateChar', {
 				method: 'post',
 				headers: {
@@ -96,7 +100,7 @@ class BattleScreen extends Component {
 					battleID: this.props.content.BATTLEID,
 				}),
 			});
-		} else if (this.state.blueStat.attack > this.state.redStat.attack) {
+		} else {
 			fetch('/api/updateChar', {
 				method: 'post',
 				headers: {
@@ -127,8 +131,11 @@ class BattleScreen extends Component {
 		return (
 			<div className="battleStage">
 				<h3 style={{ color: '#111111' }}>{this.state.redStat.red_name}</h3>
+				<ProgressBar now={100} bsStyle="danger" />
 				<h4 style={{ color: '#111111' }}>VS</h4>
 				<h3 style={{ color: '#111111' }}>{this.state.blueStat.blue_name}</h3>
+				<ProgressBar now={100} bsStyle="info" />
+
 				{/* <BattleTime start={Date.now()} /> */}
 				{/* <RedSide redP={redStat} />
 				<BlueSide blueP={blueStat} /> */}
