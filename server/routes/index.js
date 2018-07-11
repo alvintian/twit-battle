@@ -106,7 +106,8 @@ module.exports = function(knex) {
 				'users.id',
 				'users.name',
 				'users.hp',
-				'users.attack'
+				'users.attack',
+				'users.picture'
 			)
 			.from('users')
 			.join('battle', function() {

@@ -11,7 +11,7 @@ class BlueSide extends Component {
 				<h1 style={{ color: 'white' }}>{this.props.blueP.blue_name}</h1>
 				<h2>HP: {this.props.blueP.hp}</h2>
 				<h2>ATT: {this.props.blueP.attack}</h2>
-				<h2> {this.props.blueP.attack}</h2>
+				<img src={this.props.blueP.picture} alt="" />
 			</div>
 		);
 	}

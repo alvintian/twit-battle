@@ -126,19 +126,21 @@ float:right;
   to { transform: rotate(360deg); }
 }
 
-.makechar {
+/* .makechar {
   
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   flex-wrap: nowrap;
+  margin: 10px;
+  width: 50%;
   
-}
+} */
 
-.charcontainer > div {
-  flex-grow: 2
-}
+/* .charcontainer {
+ margin: 0 auto;
+} */
 
 .char {
   box-shadow: 0 2px 2px 0;

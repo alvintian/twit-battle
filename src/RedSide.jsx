@@ -28,6 +28,7 @@ class RedSide extends Component {
 				<h1 style={{ color: 'white' }}>{this.props.redP.red_name}</h1>
 				<h2>HP: {this.props.redP.hp}</h2>
 				<h2>ATT: {this.props.redP.attack}</h2>
+				<img src={this.props.redP.picture} alt="" />
 			</div>
 		);
 	}

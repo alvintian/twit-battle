@@ -60,6 +60,7 @@ class BattleScreen extends Component {
 						red_name: battle.name,
 						hp: battle.hp,
 						attack: battle.attack,
+						picture: battle.picture,
 					},
 				});
 			}
@@ -69,6 +70,7 @@ class BattleScreen extends Component {
 						blue_name: battle.name,
 						hp: battle.hp,
 						attack: battle.attack,
+						picture: battle.picture,
 					},
 				});
 			}
@@ -111,7 +113,7 @@ class BattleScreen extends Component {
 	}
 
 	checkWinner = (redStat, blueStat) => {
-		if ((redStat.attack - blueStat.hp) > (blueStat.attack - redStat.hp)) {
+		if (redStat.attack - blueStat.hp > blueStat.attack - redStat.hp) {
 			return <RedSide redP={redStat} />;
 		} else {
 			return <BlueSide blueP={blueStat} />;

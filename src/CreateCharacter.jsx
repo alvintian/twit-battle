@@ -154,12 +154,23 @@ class CreateCharacter extends Component {
 				}}>
 				<h2>Create Your Character!</h2>
 				<div
-					className="charcontainer"
-					style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-					<div className="makechar">
+					// className="charcontainer"
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						width: '80%',
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}>
+					<div>
 						<div
-							className="char"
-							style={{ backgroundColor: '#1DA1F2', width: '100%' }}>
+							// className="makeChar"
+							style={{
+								backgroundColor: '#1DA1F2',
+								width: '100%',
+								flex: '1',
+								padding: '1em',
+							}}>
 							<h4 style={{ color: '#CCEEFF' }}>Twitter Character</h4>
 							<input
 								className=""
@@ -187,9 +198,15 @@ class CreateCharacter extends Component {
 							) : null}
 						</div>
 					</div>
-					<div className="makechar">
-						<div className="char" style={{ backgroundColor: '#CCC' }}>
-							<h4 style={{ color: '#FFF' }}>Base Character</h4>
+					<div>
+						<div
+							// className="makeChar"
+							style={{
+								backgroundColor: '#CCC',
+								flex: '1',
+								padding: '1em',
+							}}>
+							<h4 style={{ color: '#111111' }}>Base Character</h4>
 							<form onSubmit={this.handleSubmit}>
 								<input
 									className=""
@@ -200,9 +217,14 @@ class CreateCharacter extends Component {
 									type="text"
 								/>
 								<div>
-									<p style={{ fontSize: '14px' }}>
+									<span
+										style={{
+											fontSize: '14px',
+											height: '50%',
+											color: '#111111',
+										}}>
 										Write a bit about your character
-									</p>
+									</span>
 								</div>
 								<textarea
 									className="textarea"
