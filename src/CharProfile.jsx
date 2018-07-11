@@ -5,58 +5,64 @@ import ActiveMatch from "./ActiveMatch.jsx";
 
 class CharProfile extends Component {
 	constructor(props) {
-			super(props);
-			this.state = {
-				data: [],
-				charStat: {},
-				unparsedBattle: []
-			};
-			fetch(`/api/AllChar/${this.props.id}`)
-				.then(response => response.json())
-				.then(response => {
-						for (let x = 0; x < response.length; x++) {
-							if (response[x].id === parseInt(this.props.id,8)) {
-								this.setState({
-									charStat: response[x]
-								})
-							}
-							if (response[x].blue_side_id_fk === parseInt(this.props.id,8)||response[x].red_side_id_fk === parseInt(this.props.id,8)) {
-								this.setState({
-									unparsedBattle: [...this.state.unparsedBattle, response[x]]
-								})
-							}
-							this.parseBattle(this.state.unparsedBattle);
-						};
+		super(props);
+		this.state = {
+			data: [],
+			charStat: {},
+			unparsedBattle: []
+		};
+	}
+
+	parseBattle = x => {
+		//zach's code great help!
+		let battleObj = {};
+		x.forEach(battle => {
+			// if battle doesn't already exist
+			if (!battleObj[battle.BATTLEID]) {
+				// add to battle object
+				battleObj[battle.BATTLEID] = {
+					BATTLEID: battle.BATTLEID,
+				};
+			}
+			if (battle.id === battle.red_side_id_fk) {
+				battleObj[battle.BATTLEID].red_name = battle.name;
+				battleObj[battle.BATTLEID].red_hp = battle.hp;
+				battleObj[battle.BATTLEID].red_attack = battle.attack;
+			} else if (battle.id === battle.blue_side_id_fk) {
+				battleObj[battle.BATTLEID].blue_name = battle.name;
+				battleObj[battle.BATTLEID].blue_hp = battle.hp;
+				battleObj[battle.BATTLEID].blue_attack = battle.attack;
+			}
+		});
+		this.setState({
+			data: Object.values(battleObj),
+		});
+	};
+	componentDidMount() {
+		fetch(`/api/AllChar/${this.props.id}`)
+			.then(response => response.json())
+			.then(response => {
+				console.log(response,"what's ALlChar response???")
+				this.setState({
+					charStat: response[0]
+				})
+			})
+	fetch(`/api/AllChar/${this.props.id}/battles`)
+	.then(response => response.json())
+	.then(response => {
+		console.log(response,"what's ALlChar/battles response???")
+	for (let x = 0; x < response.length; x++) {
+		if (response[x].blue_side_id_fk === parseInt(this.props.id, 8) || response[x].red_side_id_fk === parseInt(this.props.id, 8)) {
+				this.setState({
+					unparsedBattle: [...this.state.unparsedBattle, response[x]]
 				})
 			}
-
-			parseBattle = x => {
-				//zach's code great help!
-				let battleObj = {};
-				x.forEach(battle => {
-					// if battle doesn't already exist
-					if (!battleObj[battle.BATTLEID]) {
-						// add to battle object
-						battleObj[battle.BATTLEID] = {
-							BATTLEID: battle.BATTLEID,
-						};
-					}
-					if (battle.id === battle.red_side_id_fk) {
-						battleObj[battle.BATTLEID].red_name = battle.name;
-						battleObj[battle.BATTLEID].red_hp = battle.hp;
-						battleObj[battle.BATTLEID].red_attack = battle.attack;
-					} else if (battle.id === battle.blue_side_id_fk) {
-						battleObj[battle.BATTLEID].blue_name = battle.name;
-						battleObj[battle.BATTLEID].blue_hp = battle.hp;
-						battleObj[battle.BATTLEID].blue_attack = battle.attack;
-					}
-				});
-				this.setState({
-					data: Object.values(battleObj),
-				});
-			};
-
-	render() {
+		}
+			this.parseBattle(this.state.unparsedBattle);
+			console.log(this.state.data,"is data parsed????")
+		})
+	}
+			render() {
 		let activematch = this.state.data;
 		return ( <div className="leftdiv">
 				<div><h2>{this.state.charStat.name}'s PROFILE!</h2>

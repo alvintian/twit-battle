@@ -87,28 +87,26 @@ module.exports = function(knex) {
 	router.get('/AllChar/:id', (req, res) => {
 		//let user_id = req.session.;
 		knex
-			.select('users.*', 'battle.id AS BATTLEID', 'red_side_id_fk', 'blue_side_id_fk')
+			.select('*')
+			.from('users')
+			.where('id', '=', parseInt(req.params.id))
+			.then(results => {
+				res.json(results);
+			})
+	});
+	router.get('/AllChar/:id/battles', (req, res) => {
+		knex
+			.select('users.name', 'users.id','battle.id AS BATTLEID', 'red_side_id_fk', 'blue_side_id_fk')
 			.from('users')
 			.join('battle', function() {
 				this.on('battle.red_side_id_fk', '=', 'users.id').orOn('battle.blue_side_id_fk', '=', 'users.id')
 			})
-			.where('active', '=', false)//.andWhere('users.id', '=', parseInt(req.params.id))
-		.then(results => {
-			res.json(results);
-		})
-			// .returning('id')
-			//      .('poll').insert('req.body.question')
-			//    .then(response =>
-			//    		knex
-			// .select('*')
-			// .from('battle')
-			// .where('red_side_id_fk', '=', response[0]).orWhere('blue_side_id_fk', '=', response[0])
-			// .returning('id')
-			// .then(results => {
-			// 	res.json(results);
-			// })
-			// )
-	});
+			.where('active', '=', false) //.andWhere('users.id', '=', parseInt(req.params.id))
+			.then(results => {
+				res.json(results);
+			})
+	})
+
 	router.get('/CurBattle', (req, res) => {
 		//		 select users.* from users join battle ON (active=true AND (battle.red_side_id=users.id or battle.blue_side_id=users.id));
 		knex
