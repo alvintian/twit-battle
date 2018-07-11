@@ -17,7 +17,6 @@ class BattleScreen extends Component {
 		let matchInfo=this.state.matchInfo;
 		return <div>{matchInfo.blue_name}TEST!
                 <h3>RED VS BLUE!</h3>
-{/*                <p>User ID: {this.props.params.id}</p>*/}
                 <button onClick={this.onNavigateHome} className="btn btn-primary">Go Home!</button>
             </div>;
 	}

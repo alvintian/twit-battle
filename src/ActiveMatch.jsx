@@ -33,7 +33,8 @@ class ActiveMatch extends Component {
 					backgroundColor: 'purple',
 			  }
 			: {
-					backgroundColor: '#99aab5',
+					//backgroundColor: '#99aab5',
+					backgroundColor: '#D5D5D5',
 					color: '#111111',
 					overflow: 'auto',
 			  };
@@ -52,18 +53,20 @@ class ActiveMatch extends Component {
 					}}
 					className="matchBorder"
 					style={style}>
-					<div className="matchID">
-						<h3>Match #{match.BATTLEID}</h3>
-					</div>
 					<div
 						style={{
 							display: 'flex',
 							justifyContent: 'space-between',
 							flexDirection: 'row',
+							marginTop: '10px',
+							marginBottom: '10px',
 						}}>
 						<div className="redSide">
 							<h2>RED SIDE</h2>
 							<h4>{match.red_name}</h4>
+						</div>
+						<div style={{ marginLeft: '40px' }}>
+							<h1 style={{ color: '#303030', opacity: '0.7' }}>VS</h1>
 						</div>
 						<div className="blueSide">
 							<h2>BLUE SIDE</h2>

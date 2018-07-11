@@ -13,14 +13,38 @@ import {
 } from 'react-router-dom';
 import BattleScreen from './BattleScreen.jsx';
 import Twitterwars from './images/twitterwars.png';
+import TwitterwarsHome from './images/twiterwarshome.png';
 const Home = () => (
 	<div>
-		<p>Home</p>
-		<div className="create-char-button">
-			<Link to="/NewChar">Create Character</Link>
+		<div
+			style={{
+				display: 'flex',
+				justifyContent: 'center',
+				flexDirection: 'column',
+				alignItems: 'center',
+			}}>
+			<img
+				src={TwitterwarsHome}
+				width={'300px'}
+				style={{ marginTop: '20px' }}
+			/>
+			<h1>Create Your Character!</h1>
+			<div className="create-char-button">
+				<Link
+					style={{ textDecoration: 'none', color: '#111111' }}
+					to="/NewChar">
+					Create Character
+				</Link>
+			</div>
+			<h1>View Current Battles! </h1>
+			<div className="create-char-button">
+				<Link
+					style={{ textDecoration: 'none', color: '#111111' }}
+					to="/CurBattle">
+					View Battles!
+				</Link>
+			</div>
 		</div>
-		<img src={Twitterwars} style={{ width: '300px' }}/>
-		<button>View Battles</button>
 	</div>
 );
 

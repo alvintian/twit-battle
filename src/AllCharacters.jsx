@@ -21,38 +21,36 @@ class AllCharacters extends Component {
 	// 		return {counter: prevState.counter + 1}
 	// 	})
 	// }
-		onItemClick = (event) => {
-	// if(event.currentTarget.style.backgroundColor === '#ccc'){
-	//     event.currentTarget.style.backgroundColor = 'coral';
-	//  }else{
-	//  	event.currentTarget.style.backgroundColor = '#ccc';
-	//  }
-	}
+	onItemClick = event => {
+		// if(event.currentTarget.style.backgroundColor === '#ccc'){
+		//     event.currentTarget.style.backgroundColor = 'coral';
+		//  }else{
+		//  	event.currentTarget.style.backgroundColor = '#ccc';
+		//  }
+	};
 
 	render() {
 		const { message } = this.props;
-		const style = this.state.active ? {
-			backgroundColor: '#1D43E1',
-
-		} : {
-			backgroundColor: '#57609E',
-			
-		}
-		let profile = ( 
+		const style = this.state.active
+			? {
+					backgroundColor: '#1D43E1',
+			  }
+			: {
+					backgroundColor: '#57609E',
+			  };
+		let profile = (
 			<div
 				className="border"
-
 				onClick={() => {
 					this.props.onClick(message);
 					this.setState(prevState => {
-						return {active: !prevState.active}
-					})
+						return { active: !prevState.active };
+					});
 				}}
 				style={style}>
-				<h4>{message.name}</h4>
-				<li>HP: {message.hp}</li>
-				<li>ATT: {message.attack}</li>
-				<li>id: {this.state.counter}</li>
+				<h1 style={{ color: 'white' }}>{message.name}</h1>
+				<h2>HP: {message.hp}</h2>
+				<h2>ATT: {message.attack}</h2>
 			</div>
 		);
 		// let profileAttr=document.getElementsByClassName("border");
