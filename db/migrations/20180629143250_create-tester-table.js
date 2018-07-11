@@ -52,19 +52,19 @@ exports.up = function(knex, Promise) {
 				matches: 1,
 				picture: "/images/images.jpg"
 			}, {
-				name: "David",
+				name: "Mark",
 				hp: 100,
 				attack: 5,
 				eliminated: true,
 				matches: 1,
-				picture:"/images/823552.jpg"
+				picture: "/images/Mark_Zuckerberg.jpg"
 			}, {
-				name: "Juan",
+				name: "Jeff",
 				hp: 100,
 				attack: 5,
 				eliminated: false,
 				matches: 0,
-				picture: "/images/juan.png"
+				picture: "/images/bezos.jpg"
 			}]),
 			knex('battle').insert([{
 				red_side_id_fk: 1,

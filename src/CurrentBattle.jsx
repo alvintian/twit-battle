@@ -38,10 +38,12 @@ class CurrentBattle extends Component {
 				battleObj[battle.BATTLEID].red_name = battle.name;
 				battleObj[battle.BATTLEID].red_hp = battle.hp;
 				battleObj[battle.BATTLEID].red_attack = battle.attack;
+				battleObj[battle.BATTLEID].red_picture = battle.picture;
 			} else if (battle.id === battle.blue_side_id_fk) {
 				battleObj[battle.BATTLEID].blue_name = battle.name;
 				battleObj[battle.BATTLEID].blue_hp = battle.hp;
 				battleObj[battle.BATTLEID].blue_attack = battle.attack;
+				battleObj[battle.BATTLEID].red_picture = battle.picture;
 			}
 		});
 		this.setState({

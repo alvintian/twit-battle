@@ -6,13 +6,16 @@ class AllCharacters extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			messages: this.props.ListMessage,
+			messages: null,
 			active: false,
 			//			id: this.props.key,
 			counter: 0,
 		};
 	}
 
+	componentDidMount() {
+		this.setState({ messages: this.props.ListMessage });
+	}
 	// onItemClick = (event) => {
 	// 	event.preventDefault();
 	// 	console.log('clicked');
@@ -38,20 +41,28 @@ class AllCharacters extends Component {
 			: {
 					backgroundColor: '#57609E',
 			  };
+
 		let profile = (
 			<div
-				className="border"
-				onClick={() => {
+				className={'border ' + (message.eliminated === true ? 'opacity' : null)}
+				// className={'border'}
+				onClick={ e => {
+					if (e.target.classList.contains('opacity')) {
+						return;
+					}
+
 					this.props.onClick(message);
 					this.setState(prevState => {
 						return { active: !prevState.active };
 					});
 				}}
 				style={style}>
-				<h1 style={{ color: 'white' }}>{message.name}</h1>
-				<img src={message.picture} alt=""></img>
-				<h2>HP: {message.hp}</h2>
-				<h2>ATT: {message.attack}</h2>
+				{/* {message.eliminated === true ? <h2>elimnated</h2> : <h2>Alive</h2>} */}
+				<h2 style={{ color: 'white' }}>{message.name}</h2>
+
+				<h3 style={{ margin: '10px' }}>HP: {message.hp}</h3>
+				<h3 style={{ margin: '10px' }}>ATT: {message.attack}</h3>
+				<img src={message.picture} width={'200px'} height={'200px'} alt="" />
 			</div>
 		);
 		// let profileAttr=document.getElementsByClassName("border");

@@ -10,6 +10,7 @@ class BattleScreen extends Component {
 		this.state = {
 			redStat: {},
 			blueStat: {},
+			displayWinner: false,
 			// redStat: {red_name: this.props.content.red_name,
 			// 			hp: this.props.content.red_hp,
 			// 	    attack: this.props.content.red_attack},
@@ -25,6 +26,7 @@ class BattleScreen extends Component {
 				this.parseBattle(response);
 			});
 		this.onNavigateHome = this.onNavigateHome.bind(this);
+		//this.checkWinner = this.checkWinner.bind(this);
 	}
 
 	onNavigateHome() {
@@ -73,24 +75,67 @@ class BattleScreen extends Component {
 		});
 	};
 	componentWillMount() {}
-	componentDidMount() {}
+	componentDidMount() {
+		this.setState({
+			displayWinner: true,
+		});
+	}
+	componentWillUnmount() {
+		if (this.state.redStat.attack > this.state.blueStat.attack) {
+			fetch('/api/updateChar', {
+				method: 'post',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				//make sure to serialize your JSON body
+				body: JSON.stringify({
+					character: this.state.blueStat.blue_name,
+					battleID: this.props.content.BATTLEID,
+				}),
+			});
+		} else if (this.state.blueStat.attack > this.state.redStat.attack) {
+			fetch('/api/updateChar', {
+				method: 'post',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				//make sure to serialize your JSON body
+				body: JSON.stringify({
+					character: this.state.redStat.red_name,
+					battleID: this.props.content.BATTLEID,
+				}),
+			});
+		}
+	}
+
+	checkWinner = (redStat, blueStat) => {
+		if ((redStat.attack - blueStat.hp) > (blueStat.attack - redStat.hp)) {
+			return <RedSide redP={redStat} />;
+		} else {
+			return <BlueSide blueP={blueStat} />;
+		}
+	};
 
 	render() {
-		let redStat = this.state.redStat;
-		let blueStat = this.state.blueStat;
+		let { redStat, blueStat, displayWinner } = this.state;
+
+		console.log(this.props);
 		return (
 			<div className="battleStage">
-				<h3>
-					{' '}
-					{this.state.redStat.red_name}
-					VS {this.state.blueStat.blue_name}!{' '}
-				</h3>{' '}
-				<BattleTime start={Date.now()} /> <RedSide redP={redStat} />{' '}
-				<BlueSide blueP={blueStat} />{' '}
-				<button onClick={this.onNavigateHome} className="btn btn-primary">
-					{' '}
-					End match!{' '}
-				</button>{' '}
+				<h3 style={{ color: '#111111' }}>{this.state.redStat.red_name}</h3>
+				<h4 style={{ color: '#111111' }}>VS</h4>
+				<h3 style={{ color: '#111111' }}>{this.state.blueStat.blue_name}</h3>
+				{/* <BattleTime start={Date.now()} /> */}
+				{/* <RedSide redP={redStat} />
+				<BlueSide blueP={blueStat} /> */}
+				<div style={{ color: '#111111' }}>
+					<h2 style={{ color: '#57609E' }}>Winner</h2>
+				</div>
+				<div>
+					{displayWinner && <div>{this.checkWinner(redStat, blueStat)}</div>}
+				</div>
 			</div>
 		);
 	}

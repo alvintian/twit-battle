@@ -11,17 +11,20 @@ class SelectableCharacters extends Component {
 			BlueTeamCharId: 0,
 		};
 	}
-handleBattleStart=() => {
- 	this.props.postBattletoDB(this.state.RedTeamCharId, this.state.BlueTeamCharId);
-      console.log(this.state,"BATTLE START!");
+	handleBattleStart = () => {
+		this.props.postBattletoDB(
+			this.state.RedTeamCharId,
+			this.state.BlueTeamCharId
+		);
+		console.log(this.state, 'BATTLE START!');
 		let webSocketData = {
-			type: "battleTimer"
-		// battleId: "Id" 
-		}
-	this.props.onMatchStart(webSocketData);
-}
-	handleClickCard = (card) => {
-		if(this.state.RedTeamCharId === 0){
+			type: 'battleTimer',
+			// battleId: "Id"
+		};
+		this.props.onMatchStart(webSocketData);
+	};
+	handleClickCard = card => {
+		if (this.state.RedTeamCharId === 0) {
 			this.setState({
 				RedTeamCharId: card.id,
 				BlueTeamCharId: this.state.BlueTeamCharId,
@@ -36,7 +39,9 @@ handleBattleStart=() => {
 	};
 	//      console.log(event.hp);
 
-	componentDidMount() {}
+	componentDidMount() {
+		this.props.getData();
+	}
 	render() {
 		let charNames = this.props.content;
 		return (
@@ -48,6 +53,7 @@ handleBattleStart=() => {
 						message={x}
 						key={x.id}
 						onClick={x => this.handleClickCard(x)}
+						elimnated={x.elimnated}
 					/>
 				))}
 				<div>

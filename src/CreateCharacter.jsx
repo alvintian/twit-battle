@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Twitterpreview from './Twitterpreview.jsx';
 // import Message from "./Message.jsx";
 // import $ from 'jquery';
+import Popup from 'reactjs-popup';
 
 class CreateCharacter extends Component {
 	constructor(props) {
@@ -14,11 +15,13 @@ class CreateCharacter extends Component {
 			newImage: '',
 			newCharDescription: '',
 			inputLinkClicked: false,
+			modalIsOpen: false,
 		};
 		this.fd = new FormData();
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
+
 	handleChange(event) {
 		const name = event.target.name;
 		const value = event.target.value;
@@ -90,7 +93,7 @@ class CreateCharacter extends Component {
 		// })
 
 		this.fd.append('name', this.state.newName);
-				this.fd.append('select', "O");
+		this.fd.append('select', 'O');
 		this.fd.append('desc', this.state.newCharDescription);
 		fetch('/api/NewChar', {
 			method: 'POST',
@@ -149,58 +152,81 @@ class CreateCharacter extends Component {
 					height: 'auto',
 					width: 'auto',
 				}}>
-				<h2>new characters all goes in here</h2>
-				<div className="makechar">
-					<div style={{ backgroundColor: '#1DA1F2' }}>
-						<h4 style={{ color: '#CCEEFF' }}>Twitter Character</h4>
-						<input
-							className=""
-							value={this.state.twitterName}
-							name="twitterName"
-							onChange={this.handleChange}
-							onKeyUp={this.handleEnterPressed}
-							placeholder="Enter that person's twitter handle"
-							type="text"
-						/>
+				<h2>Create Your Character!</h2>
+				<div
+					className="charcontainer"
+					style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+					<div className="makechar">
+						<div
+							className="char"
+							style={{ backgroundColor: '#1DA1F2', width: '100%' }}>
+							<h4 style={{ color: '#CCEEFF' }}>Twitter Character</h4>
+							<input
+								className=""
+								value={this.state.twitterName}
+								name="twitterName"
+								onChange={this.handleChange}
+								onKeyUp={this.handleEnterPressed}
+								placeholder="Enter that person's twitter handle"
+								type="text"
+							/>
+							{this.state.inputLinkClicked ? (
+								<Popup
+									trigger={<button className="button"> Submit </button>}
+									modal
+									// position="top center"
+									closeOnDocumentClick>
+									<Twitterpreview
+										postChartoDB={this.props.postChartoDB}
+										inputLinkClicked={this.state.inputLinkClicked}
+										handleCancelTwitter={this.handleCancelTwitter}
+										twitterName={this.state.twitterName}
+										newImage={this.state.newImage}
+									/>
+								</Popup>
+							) : null}
+						</div>
+					</div>
+					<div className="makechar">
+						<div className="char" style={{ backgroundColor: '#CCC' }}>
+							<h4 style={{ color: '#FFF' }}>Base Character</h4>
+							<form onSubmit={this.handleSubmit}>
+								<input
+									className=""
+									name="newName"
+									value={this.state.newName}
+									onChange={this.handleChange}
+									placeholder="Enter New Character's name"
+									type="text"
+								/>
+								<div>
+									<p style={{ fontSize: '14px' }}>
+										Write a bit about your character
+									</p>
+								</div>
+								<textarea
+									className="textarea"
+									name="newCharDescription"
+									value={this.state.newCharDescription}
+									onChange={this.handleChange}
+								/>
+								<input
+									type="file"
+									name="photo"
+									className="photo"
+									onChange={this.handleUpload}
+								/>
+								<div>
+									<input
+										type="submit"
+										value="Submit"
+										className="button is-primary"
+									/>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
-				<div style={{ backgroundColor: '#CCC' }}>
-					<form onSubmit={this.handleSubmit}>
-						<input
-							className=""
-							name="newName"
-							value={this.state.newName}
-							onChange={this.handleChange}
-							placeholder="Enter New Character's name"
-							type="text"
-						/>
-						<input
-							type="file"
-							name="photo"
-							className="photo"
-							onChange={this.handleUpload}
-						/>
-						<label className="label">Write a bit about your character</label>
-						<textarea
-							className="textarea"
-							name="newCharDescription"
-							value={this.state.newCharDescription}
-							onChange={this.handleChange}
-						/>
-						<input type="submit" value="Submit" className="button is-primary" />
-					</form>
-				</div>
-				{this.state.inputLinkClicked ? (
-					<div style={{}}>
-						<Twitterpreview
-							postChartoDB={this.props.postChartoDB}
-							inputLinkClicked={this.state.inputLinkClicked}
-							handleCancelTwitter={this.handleCancelTwitter}
-							twitterName={this.state.twitterName}
-							newImage={this.state.newImage}
-						/>
-					</div>
-				) : null}
 			</div>
 		);
 	}
