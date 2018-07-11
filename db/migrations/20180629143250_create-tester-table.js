@@ -17,6 +17,7 @@ exports.up = function(knex, Promise) {
 			table.boolean('eliminated')
 			table.integer('matches')
 			table.string('picture')
+			table.string('description')
 		})
 	};
 

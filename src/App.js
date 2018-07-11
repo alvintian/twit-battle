@@ -69,8 +69,8 @@ class App extends Component {
 		}
 	componentDidMount() {
 		this.getData();
-		this.socket = new WebSocket("ws://localhost:3002/");
-		this.socket.addEventListener("message", event => {
+		// this.socket = new WebSocket("ws://localhost:8080/");
+		// this.socket.addEventListener("message", event => {
 		// 	const responseMessage = JSON.parse(event.data);
 		// if(typeof(responseMessage)==='number'){
 		// 	console.log(responseMessage,"total users is a numb");
@@ -90,7 +90,7 @@ class App extends Component {
 		// 	}
 		// 	const messages = this.state.messages.concat(responseMessage);
 		// 	this.setState({messages: messages})
-		});
+//		});
 	}
 
 	postBattletoDB(team_Red, team_Blue) {
@@ -129,6 +129,7 @@ class App extends Component {
 				select: charAttr,
 			}),
 		}).then(response => {
+			console.log(response.body,"twittername in props??")
 			this.getData();
 		});
 	}
@@ -152,7 +153,7 @@ class App extends Component {
 		// 	message.type="postMessage";
 		// 	message.username = this.state.currentUser.name;
 		// }
-		this.socket.send(JSON.stringify(content));
+		// this.socket.send(JSON.stringify(content));
 	}
 
 	render() {
