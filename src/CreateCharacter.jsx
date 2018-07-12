@@ -152,7 +152,7 @@ class CreateCharacter extends Component {
 					height: 'auto',
 					width: 'auto',
 				}}>
-				<h2>Create Your Character!</h2>
+				<h2 className="heading-font">Create Your Character!</h2>
 				<div
 					// className="charcontainer"
 					style={{
