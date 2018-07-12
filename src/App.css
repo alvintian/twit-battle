@@ -79,7 +79,7 @@ li {
   transform: perspective(300px) rotateX(-30deg);
   color: #f1f1f1;
   box-shadow: 5px 18px 46px 5px #222;
-  height: 94px;
+  height: 130px;
 }
 .redSide > * {    
   transform: none;   
@@ -107,8 +107,7 @@ li {
   color: #f1f1f1;
   transform: perspective(300px) rotateX(30deg);
   transform-origin: 100% 0%;
-  height: 94px;
-  
+  height: 130px;
 
                
 box-shadow: 5px 18px 46px 5px #222;
