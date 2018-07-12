@@ -12,6 +12,7 @@ class SelectableCharacters extends Component {
 			createBattleClicked: false,
 			active: false,
 			battleid: 0,
+			clickedState: 0,
 		};
 		this.handleCreateBattle = this.handleCreateBattle.bind(this);
 		this.handlecancel = this.handlecancel.bind(this);
@@ -51,11 +52,13 @@ class SelectableCharacters extends Component {
 			this.setState({
 				RedTeamCharId: card.id,
 				BlueTeamCharId: this.state.BlueTeamCharId,
+				clickedState: this.state.clickedState + 1,
 			});
 		} else {
 			this.setState({
 				RedTeamCharId: this.state.RedTeamCharId,
 				BlueTeamCharId: card.id,
+				clickedState: this.state.clickedState + 1,
 			});
 		}
 	};
@@ -84,27 +87,30 @@ class SelectableCharacters extends Component {
 		return (
 			<div>
 				{this.state.createBattleClicked ? (
-					<div>
-						<h3>Choose Your Battle Characters!</h3>
-						<button
-							className="create-char-button"
-							style={{ margin: '0 auto' }}
-							onClick={this.handlecancel}>
-							Cancel Battle
-						</button>
-						<button
-							className="create-char-button"
-							style={{ margin: '0 auto' }}
-							type="button"
-							onClick={this.handleBattleStart}>
-							Submit
-						</button>
+					<div style={{ margin: '10px' }}>
+						<h3 className="heading-font">Choose Your Battle Characters!</h3>
+						<div style={{ margin: '10px' }}>
+							<button
+								className="create-char-button"
+								style={{ margin: '0 auto' }}
+								onClick={this.handlecancel}>
+								Cancel Battle
+							</button>
+							<button
+								className="create-char-button"
+								style={{ margin: '0 auto' }}
+								type="button"
+								onClick={this.handleBattleStart}>
+								Submit
+							</button>
+						</div>
 					</div>
 				) : (
-					<div>
+					<div style={{ margin: '10px' }}>
 						<h1 className="heading-font">All Characters!</h1>
 						<button
 							style={{ margin: '0 auto' }}
+							className="create-char-button"
 							onClick={this.handleCreateBattle}>
 							Create Battle
 						</button>
@@ -116,6 +122,9 @@ class SelectableCharacters extends Component {
 						key={x.id}
 						onCharClick={x => this.handleClickCard(x)}
 						createBattleClicked={this.state.createBattleClicked}
+						clickedState={this.state.clickedState}
+						colorBlueTeamCharId={this.state.BlueTeamCharId}
+						colorRedTeamCharId={this.state.RedTeamCharId}
 					/>
 				))}
 			</div>

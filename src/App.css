@@ -67,6 +67,10 @@ li {
     
 }
 
+.redSide1 {background-Color: #FF4136;
+}
+
+
 .redSide {
   background-color: #FF4136;
   width: 46%;			
@@ -84,12 +88,15 @@ li {
 
 .opacity {
   opacity: 0.5;
-  background: #FF4136 !important; 
+  background: #AAAAAA !important; 
   /* background: 
   -moz-linear-gradient(green, green) 0px 0px no-repeat !important;
   -moz-linear-gradient(red, red) 200px 50px no-repeat !important,
   -moz-linear-gradient(blue, blue) 0px 250px no-repeat !important,
   -moz-linear-gradient(gray, gray) 300px 125px no-repeat !important; */
+}
+
+.blueSide1 {background-Color: #0074D9;
 }
 
 .blueSide {

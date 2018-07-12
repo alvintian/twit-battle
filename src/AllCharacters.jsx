@@ -12,6 +12,7 @@ class AllCharacters extends Component {
 			createBattleClicked: this.props.createBattleClicked,
 			characterClicked: false,
 			counter: 0,
+			stateColor: 0,
 		};
 	}
 
@@ -36,10 +37,22 @@ class AllCharacters extends Component {
 
 	render() {
 		const { message } = this.props;
+		// const style = this.state.active
+		// 	? {
+		// 			backgroundColor: '#FF4136',
+		// 	  }
+		// 	: {
+		// 			backgroundColor: '#57609E',
+		// 	  };
+
 		const style = this.state.active
-			? {
-					backgroundColor: '#1D43E1',
-			  }
+			? this.props.colorRedTeamCharId !== 0
+				? this.props.colorBlueTeamCharId !== 0
+					? {
+							backgroundColor: '#FF4136',
+					  }
+					: { backgroundColor: '#0074D9' }
+				: { backgroundColor: '#0074D9' }
 			: {
 					backgroundColor: '#57609E',
 			  };
@@ -67,6 +80,7 @@ class AllCharacters extends Component {
 								this.props.createBattleClicked === false
 									? !prevState.characterClicked
 									: false,
+							stateColor: this.state.stateColor + 1,
 						};
 					});
 				}}
