@@ -52,6 +52,7 @@ class BattleScreen extends Component {
 						hp: battle.hp,
 						attack: battle.attack,
 						picture: battle.picture,
+						red_id:battle.id
 					},
 					cur_red_hp: battle.hp,
 				});
@@ -63,6 +64,7 @@ class BattleScreen extends Component {
 						hp: battle.hp,
 						attack: battle.attack,
 						picture: battle.picture,
+						blue_id:battle.id
 					},
 					cur_blue_hp: battle.hp,
 				});
@@ -117,6 +119,7 @@ class BattleScreen extends Component {
 		);
 	}
 	componentWillUnmount() {
+		console.log(this.state.blueStat,"womp womp...")
 		clearInterval(this.timer);
 		fetch('/api/updateChar', {
 			method: 'post',
@@ -128,8 +131,11 @@ class BattleScreen extends Component {
 			body: JSON.stringify({
 				character:
 					this.state.cur_blue_hp <= 0
-						? this.state.blueStat.blue_name
-						: this.state.redStat.red_name,
+						? this.state.blueStat.blue_id
+						: this.state.redStat.red_id,
+				charWinner:	this.state.cur_blue_hp <= 0
+						? this.state.redStat.red_id
+						: this.state.blueStat.blue_id,
 				battleID: this.props.content.BATTLEID,
 				red_side_hp: this.state.cur_red_hp,
 				blue_side_hp: this.state.cur_blue_hp,
@@ -146,7 +152,7 @@ class BattleScreen extends Component {
 	};
 
 	render() {
-		let { redStat, blueStat, displayWinner } = this.state;
+		let { redStat, blueStat } = this.state;
 		let redHealthPercent =
 			(this.state.cur_red_hp / this.state.redStat.hp) * 100;
 		let blueHealthPercent =
