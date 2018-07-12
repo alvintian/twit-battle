@@ -21,7 +21,7 @@ class RedSide extends Component {
 	render() {
 		// console.log(this.props,"who is red prop inside render??")
 		// let redplayer=this.state.redplayer;
-		console.log(this.props.redP.red_name, 'who is red??');
+//		console.log(this.props.redP.red_name, 'who is red??');
 		// return (<div className="redPlayer">RED:{this.props.redP.red_name}</div>)
 		return (
 			<div className="border" style={{ backgroundColor: '#FF4136' }}>

@@ -277,25 +277,18 @@ class App extends Component {
 									/>
 								)}
 							/>
-							<Route
-								exact
-								path={'/CurBattle/:id'}
-								render={({ match }) => (
-									<BattleScreen content={matchState} id={match.params.id} />
-								)}
-							/>
-							<Route
-								exact
-								path={'/AllChar/:id'}
-								render={({ match }) => (
-									<CharProfile content={matchState} id={match.params.id} />
-								)}
-							/>
-							<Route
-								exact
-								path="/CurBattle"
-								render={() => <CurrentBattle matchInfo={this.matchInfo} />}
-							/>
+						  	<Route exact path={"/CurBattle/:id"}
+									render={({match}) => (
+							<BattleScreen content={matchState} id={match.params.id} />
+								)}/>
+						  	<Route exact path={"/AllChar/:id"}
+									render={({match}) => (
+							<CharProfile id={match.params.id} />
+								)}/>
+							<Route exact path="/CurBattle" 
+									render={() => (
+							<CurrentBattle matchInfo={this.matchInfo}/>
+								)} />
 						</Switch>
 					</div>
 				</Router>
