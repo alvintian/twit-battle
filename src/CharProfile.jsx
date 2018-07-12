@@ -42,7 +42,6 @@ class CharProfile extends Component {
 		fetch(`/api/AllChar/${this.props.id}`)
 			.then(response => response.json())
 			.then(response => {
-				console.log(response,"what's ALlChar response???")
 				this.setState({
 					charStat: response[0]
 				})
@@ -50,16 +49,14 @@ class CharProfile extends Component {
 	fetch(`/api/AllChar/${this.props.id}/battles`)
 	.then(response => response.json())
 	.then(response => {
-		console.log(response,"what's ALlChar/battles response???")
 	for (let x = 0; x < response.length; x++) {
-		if (response[x].blue_side_id_fk === parseInt(this.props.id, 8) || response[x].red_side_id_fk === parseInt(this.props.id, 8)) {
+		if (response[x].blue_side_id_fk === Number(this.props.id) || response[x].red_side_id_fk === Number(this.props.id)) {
 				this.setState({
 					unparsedBattle: [...this.state.unparsedBattle, response[x]]
 				})
 			}
 		}
 			this.parseBattle(this.state.unparsedBattle);
-			console.log(this.state.data,"is data parsed????")
 		})
 	}
 			render() {

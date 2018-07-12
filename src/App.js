@@ -278,7 +278,7 @@ class App extends Component {
 								)}/>
 						  	<Route exact path={"/AllChar/:id"}
 									render={({match}) => (
-							<CharProfile content={matchState} id={match.params.id} />
+							<CharProfile id={match.params.id} />
 								)}/>
 							<Route exact path="/CurBattle" 
 									render={() => (
