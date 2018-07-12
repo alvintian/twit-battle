@@ -281,11 +281,12 @@ module.exports = function(knex) {
 					blue_side_id_fk: req.body.teamBlue,
 					active: true,
 				},
-			])
-			.then(results => {
-				console.log(results);
-				res.json(results);
-			});
+			]).returning('id')
+      .then((result) => {
+    //  	console.log(result[0],"did i return id????")
+    //    res.redirect(`/CurBattle/`+JSON.stringify(result[0]));
+     res.json(result[0]);
+      });
 	});
 	router.post('/updateChar', (req, res) => {
 		knex('users')
