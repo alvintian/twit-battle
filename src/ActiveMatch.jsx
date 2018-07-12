@@ -65,8 +65,21 @@ class ActiveMatch extends Component {
 			  };
 		let profile = (
 			<div>
-				<div className="matchID">
-					<h2 style={{ color: '#E0E0E0' }}>Match #{match.BATTLEID}</h2>
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						justifyContent: 'center',
+						alignContent: 'center',
+					}}>
+					<div className="matchID">
+						<h2 style={{ color: '#E0E0E0' }}>Match #{match.BATTLEID}</h2>
+					</div>
+					<div style={{ color: '#E0E0E0' }}>
+						{match.active ? null : (
+							<h2>Battle Lasted: {match.timer} seconds</h2>
+						)}
+					</div>
 				</div>
 				<div
 					onClick={() => {
@@ -96,19 +109,16 @@ class ActiveMatch extends Component {
 							<h4 style={{ color: '#F5F5F5', fontWeight: 'bold' }}>
 								{match.red_name}
 							</h4>
-							{match.active ?
-							null 
-							: <h4 style={{ color: '#F5F5F5', fontWeight: 'bold' }}>
-								{match.red_side_hp}
-							</h4>
-							 }
+							{match.active ? null : (
+								<h4 style={{ color: '#F5F5F5', fontWeight: 'bold' }}>
+									{match.red_side_hp}
+								</h4>
+							)}
 						</div>
 						<div style={{ marginLeft: '40px' }}>
 							<h1 style={{ color: '#303030', opacity: '0.7' }}>VS</h1>
 						</div>
-						{match.active ? 
-							null :<div>Battle Lasted: {match.timer} seconds</div>
-						}
+
 						<div className="blueSide" />
 						<div
 							style={{
@@ -119,11 +129,11 @@ class ActiveMatch extends Component {
 							<h4 style={{ color: '#F5F5F5', fontWeight: 'bold' }}>
 								{match.blue_name}
 							</h4>
-								{match.active ? 
-							null : <h4 style={{ color: '#F5F5F5', fontWeight: 'bold' }}>
-								{match.blue_side_hp}
-							</h4>
-							 }
+							{match.active ? null : (
+								<h4 style={{ color: '#F5F5F5', fontWeight: 'bold' }}>
+									{match.blue_side_hp}
+								</h4>
+							)}
 						</div>
 					</div>
 				</div>

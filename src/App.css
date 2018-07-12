@@ -67,7 +67,7 @@ li {
     
 }
 
-.redSide1 {background-Color: #FF4136;
+body .redSide1 {background-color: #FF4136 ;
 }
 
 
@@ -96,7 +96,7 @@ li {
   -moz-linear-gradient(gray, gray) 300px 125px no-repeat !important; */
 }
 
-.blueSide1 {background-Color: #0074D9;
+body   .blueSide1 {background-color: #0074D9;
 }
 
 .blueSide {
@@ -114,6 +114,9 @@ box-shadow: 5px 18px 46px 5px #222;
 
 }
 
+.baseColorCharbg {
+  background-Color:#57609E ;
+}
 
  .blueSide > * {  
   transform: perspective(-300px) rotateX(-30deg) !important;

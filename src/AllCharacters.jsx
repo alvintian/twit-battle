@@ -11,8 +11,8 @@ class AllCharacters extends Component {
 			active: false,
 			createBattleClicked: this.props.createBattleClicked,
 			characterClicked: false,
-//			counter: 0,
-			secondActive:false
+			//			counter: 0,
+			secondActive: false,
 		};
 	}
 
@@ -37,11 +37,13 @@ class AllCharacters extends Component {
 
 	render() {
 		const { message } = this.props;
-		const style = this.state.active
-			? null
-			: {
-					backgroundColor: '#57609E',
-			  };
+		// const style = this.state.active
+		// 	? {
+		// 			backgroundColor: '#57609E',
+		// 	  }
+		// 	: {
+		// 			backgroundColor: '#57609E',
+		// 	  };
 
 		// const style = this.state.active
 		// 	? this.props.colorRedTeamCharId !== 0
@@ -61,33 +63,53 @@ class AllCharacters extends Component {
 		) {
 			return <Redirect to={'/AllChar/' + this.props.message.id} />;
 		}
+
+		// var btnClass = classNames({
+		// 	border: true,
+		// 	opacity: message.eliminated,
+		// 	redSide1: this.state.isPressed,
+		// 	blueSide1: !this.state.isPressed && this.state.isHovered,
+		// });
+
 		let profile = (
 			<div
 				ref="element"
-				className={'border ' + (message.eliminated === true ? 'opacity' : null)}
+				className={
+					'baseColorCharbg ' +
+					'border ' +
+					(message.eliminated === true ? 'opacity ' : '') +
+					// (this.props.createBattleClicked === true ? 'opacity ' : '') +
+					(this.props.colorRedTeamCharId === this.props.charID
+						? 'redSide1 '
+						: '') +
+					(this.props.colorBlueTeamCharId === this.props.charID
+						? 'blueSide1 '
+						: '')
+				}
 				onClick={e => {
 					if (e.target.classList.contains('opacity')) {
 						return;
 					}
-					const element = this.refs.element;
-					if (this.props.colorRedTeamCharId === 0 ) {
-						element.classList.add('redSide1');
-					} else {
-						element.classList.add('blueSide1');
-					}
+					// const element = this.refs.element;
+					// if (this.props.colorRedTeamCharId === 0) {
+					// 	element.classList.add('redSide1');
+					// } else {
+					// 	element.classList.add('blueSide1');
+					// }
 					this.props.onCharClick(message);
 					this.setState(prevState => {
 						return {
-							active: false? !prevState.active : true,
+							active: false ? !prevState.active : true,
 							characterClicked:
 								this.props.createBattleClicked === false
 									? !prevState.characterClicked
 									: false,
-							secondActive:this.state.active ? true: false
+							secondActive: this.state.active ? true : false,
 						};
 					});
 				}}
-				style={style}>
+				// style={style}
+			>
 				{/* {message.eliminated === true ? <h2>elimnated</h2> : <h2>Alive</h2>} */}
 				<h2 style={{ color: 'white' }}>{message.name}</h2>
 				<h3 style={{ margin: '10px' }}>HP: {message.hp}</h3>
