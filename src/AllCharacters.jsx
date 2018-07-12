@@ -71,7 +71,7 @@ class AllCharacters extends Component {
 						return;
 					}
 					const element = this.refs.element;
-					if (this.props.colorRedTeamCharId === 0) {
+					if (this.props.colorRedTeamCharId === 0 ) {
 						element.classList.add('redSide1');
 					} else {
 						element.classList.add('blueSide1');

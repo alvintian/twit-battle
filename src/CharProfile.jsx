@@ -41,51 +41,58 @@ class CharProfile extends Component {
 			.then(response => response.json())
 			.then(response => {
 				this.setState({
-					charStat: response[0]
-				})
-			})
-	fetch(`/api/AllChar/${this.props.id}/battles`)
-	.then(response => response.json())
-	.then(response => {
-	for (let x = 0; x < response.length; x++) {
-		if (response[x].blue_side_id_fk === Number(this.props.id) || response[x].red_side_id_fk === Number(this.props.id)) {
-				this.setState({
-					unparsedBattle: [...this.state.unparsedBattle, response[x]]
-				})
-			}
-		}
-			this.parseBattle(this.state.unparsedBattle);
-		})
+					charStat: response[0],
+				});
+			});
+		fetch(`/api/AllChar/${this.props.id}/battles`)
+			.then(response => response.json())
+			.then(response => {
+				for (let x = 0; x < response.length; x++) {
+					if (
+						response[x].blue_side_id_fk === Number(this.props.id) ||
+						response[x].red_side_id_fk === Number(this.props.id)
+					) {
+						this.setState({
+							unparsedBattle: [...this.state.unparsedBattle, response[x]],
+						});
+					}
+				}
+				this.parseBattle(this.state.unparsedBattle);
+			});
 	}
 	render() {
 		let activematch = this.state.data;
 		return (
 			<div className="leftdiv">
 				<div>
-					<h2>{this.state.charStat.name}'s PROFILE!</h2>
+					<h1 style={{ color: '#FFF', fontWeight: 'bold' }}>
+						{this.state.charStat.name}'s Profile
+					</h1>
 					<img src={this.state.charStat.picture} alt="" />
-					<h4>{this.state.charStat.name}</h4>
+					<h2 style={{ color: '#FFF', fontWeight: 'bold' }}>
+						{this.state.charStat.name}
+					</h2>
 				</div>
-				<div className="rightdiv">
-					<li>
+				<div className="rightdiv" style={{ margin: '10px' }}>
+					{/* <li>
 						<h4>Number of matches {this.state.charStat.matches}</h4>
-					</li>
-					<li>
-						<h4>Attack: {this.state.charStat.attack}</h4>
-					</li>
-					<li>
-						<h4>HP: {this.state.charStat.hp}</h4>
-					</li>
-					<li>
-						<h4>
-							Eliminated: {this.state.charStat.eliminated ? 'True' : 'False'}
-						</h4>
-					</li>
-					<li>
-						<h4>Description: {this.state.charStat.description}</h4>
-					</li>
+					</li> */}
+
+					<h2 style={{ color: '#FFF' }}>
+						Attack: {this.state.charStat.attack}
+					</h2>
+
+					<h2 style={{ color: '#FFF' }}>HP: {this.state.charStat.hp}</h2>
+
+					<h2 style={{ color: '#FFF' }}>
+						Eliminated: {this.state.charStat.eliminated ? 'True' : 'False'}
+					</h2>
+
+					<h2 style={{ color: '#FFF' }}>
+						Description: {this.state.charStat.description}
+					</h2>
 				</div>
-				<p>Past matches:</p>
+				<h2 style={{ color: '#FFF', fontWeight: 'bold' }}>Past matches:</h2>
 				{/* {this.state.charStat.matches > 0
 					? activematch.map(x => (
 							<ActiveMatch

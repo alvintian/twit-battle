@@ -156,15 +156,19 @@ class BattleScreen extends Component {
 		}
 		return (
 			<div className="battleStage">
-				<h3 style={{ color: '#111111' }}>{this.state.redStat.red_name}</h3>
+				<h1 style={{ color: '#FF4136', fontWeight: 'bold' }}>
+					{this.state.redStat.red_name}
+				</h1>
 				<ProgressBar
 					active
 					now={redHealthPercent < 0 ? 0 : redHealthPercent}
 					striped
 					bsStyle="danger"
 				/>
-				<h4 style={{ color: '#111111' }}>VS</h4>
-				<h3 style={{ color: '#111111' }}>{this.state.blueStat.blue_name}</h3>
+				<h2 style={{ color: '#111111', fontWeight: 'bold' }}>VS</h2>
+				<h1 style={{ color: '#0074D9', fontWeight: 'bold' }}>
+					{this.state.blueStat.blue_name}
+				</h1>
 				<ProgressBar
 					active
 					now={blueHealthPercent < 0 ? 0 : blueHealthPercent}

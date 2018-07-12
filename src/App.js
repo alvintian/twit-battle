@@ -27,10 +27,10 @@ const Home = () => (
 			<h1 style={{ color: '#FFFFFF', fontWeight: 'bold', lineHeight: '30px' }}>
 				Twitter Battle!
 			</h1>
-			<h2 style={{ color: '#F5F5F5' }}>
+			<h3 style={{ color: '#EEEEEE' }}>
 				Create Your Character Using Twitter Api to Battle Other Twitter
 				Character!
-			</h2>
+			</h3>
 			<img
 				src={TwitterwarsHome}
 				width={'300px'}
