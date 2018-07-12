@@ -38,7 +38,6 @@ class BattleScreen extends Component {
 		});
 	} 
 handlerecordTime(x){
-	console.log(x,"what is xxxxxxxxxxx");
 		this.setState({
 		recordTime: x
 			});
@@ -149,7 +148,11 @@ handlerecordTime(x){
 				battleID: this.props.content.BATTLEID,
 				red_side_hp: this.state.cur_red_hp,
 				blue_side_hp: this.state.cur_blue_hp,
-				time:this.state.recordTime
+				time:this.state.recordTime,
+				increaseAtk:
+					this.state.cur_blue_hp <= 0
+						? this.state.blueStat.attack
+						: this.state.redStat.attack
 			}),
 		});
 	}

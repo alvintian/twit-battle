@@ -323,7 +323,7 @@ module.exports = function(knex) {
 
 			knex('users')
 			.where('id','=', req.body.charWinner)
-			.increment('attack', 15).then(x => {
+			.increment('attack', req.body.increaseAtk).then(x => {
 				console.log('increment charWinner attack')});
 
 			knex('users')
