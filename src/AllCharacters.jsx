@@ -11,8 +11,8 @@ class AllCharacters extends Component {
 			active: false,
 			createBattleClicked: this.props.createBattleClicked,
 			characterClicked: false,
-			counter: 0,
-			stateColor: 0,
+//			counter: 0,
+			secondActive:false
 		};
 	}
 
@@ -59,10 +59,9 @@ class AllCharacters extends Component {
 			this.props.createBattleClicked === false &&
 			this.state.characterClicked === true
 		) {
-			//			console.log(this.props.characterClicked,"props or false??")
-			console.log(this.state.characterClicked, 'state or false??');
 			return <Redirect to={'/AllChar/' + this.props.message.id} />;
 		}
+		console.log(this.state.active,this.state.secondActive,"what are the two actives??")
 		let profile = (
 			<div
 				ref="element"
@@ -80,19 +79,18 @@ class AllCharacters extends Component {
 					this.props.onCharClick(message);
 					this.setState(prevState => {
 						return {
-							active: !prevState.active,
+							active: false? !prevState.active : true,
 							characterClicked:
 								this.props.createBattleClicked === false
 									? !prevState.characterClicked
 									: false,
-							stateColor: this.state.stateColor + 1,
+							secondActive:this.state.active ? true: false
 						};
 					});
 				}}
 				style={style}>
 				{/* {message.eliminated === true ? <h2>elimnated</h2> : <h2>Alive</h2>} */}
 				<h2 style={{ color: 'white' }}>{message.name}</h2>
-
 				<h3 style={{ margin: '10px' }}>HP: {message.hp}</h3>
 				<h3 style={{ margin: '10px' }}>ATT: {message.attack}</h3>
 				<img src={message.picture} width={'200px'} height={'200px'} alt="" />
