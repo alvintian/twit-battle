@@ -21,14 +21,22 @@ class RedSide extends Component {
 	render() {
 		// console.log(this.props,"who is red prop inside render??")
 		// let redplayer=this.state.redplayer;
-//		console.log(this.props.redP.red_name, 'who is red??');
+		//		console.log(this.props.redP.red_name, 'who is red??');
 		// return (<div className="redPlayer">RED:{this.props.redP.red_name}</div>)
 		return (
-			<div className="border" style={{ backgroundColor: '#FF4136' }}>
+			<div
+				className="border"
+				style={{ backgroundColor: '#FF4136', padding: '1em', height: '400px' }}>
 				<h1 style={{ color: 'white' }}>{this.props.redP.red_name}</h1>
 				<h2>HP: {this.props.redP.hp}</h2>
 				<h2>ATT: {this.props.redP.attack}</h2>
-				<img src={this.props.redP.picture} alt="" />
+
+				<img
+					src={this.props.redP.picture}
+					alt=""
+					width={'200px'}
+					height={'200px'}
+				/>
 			</div>
 		);
 	}

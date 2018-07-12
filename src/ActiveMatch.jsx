@@ -66,7 +66,7 @@ class ActiveMatch extends Component {
 		let profile = (
 			<div>
 				<div className="matchID">
-					<h3>Match #{match.BATTLEID}</h3>
+					<h2 style={{ color: '#E0E0E0' }}>Match #{match.BATTLEID}</h2>
 				</div>
 				<div
 					onClick={() => {
@@ -92,8 +92,10 @@ class ActiveMatch extends Component {
 								left: '20%',
 								zIndex: '999',
 							}}>
-							<h2>RED SIDE</h2>
-							<h4>{match.red_name}</h4>
+							<h3 style={{ color: '#F5F5F5' }}>RED SIDE</h3>
+							<h4 style={{ color: '#F5F5F5', fontWeight: 'bold' }}>
+								{match.red_name}
+							</h4>
 						</div>
 						<div style={{ marginLeft: '40px' }}>
 							<h1 style={{ color: '#303030', opacity: '0.7' }}>VS</h1>
@@ -104,8 +106,10 @@ class ActiveMatch extends Component {
 								position: 'absolute',
 								right: '20%',
 							}}>
-							<h2>BLUE SIDE</h2>
-							<h4>{match.blue_name}</h4>
+							<h2 style={{ color: '#f5f5f5' }}>BLUE SIDE</h2>
+							<h4 style={{ color: '#F5F5F5', fontWeight: 'bold' }}>
+								{match.blue_name}
+							</h4>
 						</div>
 					</div>
 				</div>

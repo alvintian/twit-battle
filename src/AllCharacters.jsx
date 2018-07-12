@@ -37,25 +37,23 @@ class AllCharacters extends Component {
 
 	render() {
 		const { message } = this.props;
-		// const style = this.state.active
-		// 	? {
-		// 			backgroundColor: '#FF4136',
-		// 	  }
-		// 	: {
-		// 			backgroundColor: '#57609E',
-		// 	  };
-
 		const style = this.state.active
-			? this.props.colorRedTeamCharId !== 0
-				? this.props.colorBlueTeamCharId !== 0
-					? {
-							backgroundColor: '#FF4136',
-					  }
-					: { backgroundColor: '#0074D9' }
-				: { backgroundColor: '#0074D9' }
+			? null
 			: {
 					backgroundColor: '#57609E',
 			  };
+
+		// const style = this.state.active
+		// 	? this.props.colorRedTeamCharId !== 0
+		// 		? this.props.colorBlueTeamCharId !== 0
+		// 			? {
+		// 					backgroundColor: '#FF4136',
+		// 			  }
+		// 			: { backgroundColor: '#0074D9' }
+		// 		: { backgroundColor: '#0074D9' }
+		// 	: {
+		// 			backgroundColor: '#57609E',
+		// 	  };
 		console.log();
 		if (
 			this.props.createBattleClicked === false &&
@@ -67,10 +65,17 @@ class AllCharacters extends Component {
 		}
 		let profile = (
 			<div
+				ref="element"
 				className={'border ' + (message.eliminated === true ? 'opacity' : null)}
 				onClick={e => {
 					if (e.target.classList.contains('opacity')) {
 						return;
+					}
+					const element = this.refs.element;
+					if (this.props.colorRedTeamCharId === 0) {
+						element.classList.add('redSide1');
+					} else {
+						element.classList.add('blueSide1');
 					}
 					this.props.onCharClick(message);
 					this.setState(prevState => {

@@ -16,8 +16,8 @@ class BattleScreen extends Component {
 			cur_red_hp: null,
 			cur_blue_hp: null,
 			displayWinner: false,
-			redPTurn:true,
-			active:false
+			redPTurn: true,
+			active: false,
 			// redStat: {red_name: this.props.content.red_name,
 			// 			hp: this.props.content.red_hp,
 			// 	    attack: this.props.content.red_attack},
@@ -29,11 +29,11 @@ class BattleScreen extends Component {
 		//this.checkWinner = this.checkWinner.bind(this);
 		this.handleBackButton = this.handleBackButton.bind(this);
 	}
-handleBackButton(){
-	this.setState({
-		active:true
-	})
-}
+	handleBackButton() {
+		this.setState({
+			active: true,
+		});
+	}
 	parseBattle = x => {
 		//zach's code great help!
 		let battleObj = {};
@@ -85,51 +85,56 @@ handleBackButton(){
 					'what is redhp?'
 				);
 				if (this.state.cur_red_hp > 0 && this.state.cur_blue_hp > 0) {
-					if(this.state.redPTurn===true){
-					this.setState(prevState =>{
-     						return {redPTurn: !prevState.redPTurn,
-								cur_blue_hp: this.state.cur_blue_hp - this.state.redStat.attack
-					}});
-				}else{
-					this.setState(prevState =>{
-     						return {redPTurn: !prevState.redPTurn,
-									cur_red_hp: this.state.cur_red_hp - this.state.blueStat.attack,
-					}});
-				}
-				}else if (this.state.cur_red_hp <= 0) {
-					this.setState({
-						displayWinner: true,
-
-					});
-							clearInterval(this.timer);
-				}
-				else if (this.state.cur_blue_hp <= 0) {
+					if (this.state.redPTurn === true) {
+						this.setState(prevState => {
+							return {
+								redPTurn: !prevState.redPTurn,
+								cur_blue_hp: this.state.cur_blue_hp - this.state.redStat.attack,
+							};
+						});
+					} else {
+						this.setState(prevState => {
+							return {
+								redPTurn: !prevState.redPTurn,
+								cur_red_hp: this.state.cur_red_hp - this.state.blueStat.attack,
+							};
+						});
+					}
+				} else if (this.state.cur_red_hp <= 0) {
 					this.setState({
 						displayWinner: true,
 					});
-							clearInterval(this.timer);
+					clearInterval(this.timer);
+				} else if (this.state.cur_blue_hp <= 0) {
+					this.setState({
+						displayWinner: true,
+					});
+					clearInterval(this.timer);
 				}
-//				console.log(this.state.cur_red_hp, 'what is redhp after set??');
+				//				console.log(this.state.cur_red_hp, 'what is redhp after set??');
 			}.bind(this),
 			500
 		);
 	}
 	componentWillUnmount() {
 		clearInterval(this.timer);
-			fetch('/api/updateChar', {
-				method: 'post',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				//make sure to serialize your JSON body
-				body: JSON.stringify({
-					character: (this.state.cur_blue_hp <= 0) ? this.state.blueStat.blue_name:this.state.redStat.red_name,
-					battleID: this.props.content.BATTLEID,
-					red_side_hp:this.state.cur_red_hp,
-					blue_side_hp:this.state.cur_blue_hp
-				}),
-			});
+		fetch('/api/updateChar', {
+			method: 'post',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			//make sure to serialize your JSON body
+			body: JSON.stringify({
+				character:
+					this.state.cur_blue_hp <= 0
+						? this.state.blueStat.blue_name
+						: this.state.redStat.red_name,
+				battleID: this.props.content.BATTLEID,
+				red_side_hp: this.state.cur_red_hp,
+				blue_side_hp: this.state.cur_blue_hp,
+			}),
+		});
 	}
 
 	checkWinner = (redStat, blueStat) => {
@@ -146,9 +151,9 @@ handleBackButton(){
 			(this.state.cur_red_hp / this.state.redStat.hp) * 100;
 		let blueHealthPercent =
 			(this.state.cur_blue_hp / this.state.blueStat.hp) * 100;
-    	  		if (this.state.active === true) {
-       			return <Redirect to={'/AllChar'} />;
-        		}
+		if (this.state.active === true) {
+			return <Redirect to={'/AllChar'} />;
+		}
 		return (
 			<div className="battleStage">
 				<h3 style={{ color: '#111111' }}>{this.state.redStat.red_name}</h3>
@@ -171,7 +176,7 @@ handleBackButton(){
 				{this.state.displayWinner === true ? (
 					<div>
 						<div style={{ color: '#111111' }}>
-							<h2 style={{ color: '#57609E' }}>Winner</h2>
+							<h1 style={{ color: '#FFFFFF', fontWeight: 'bold' }}>Winner</h1>
 						</div>
 						<div>
 							<div>{this.checkWinner(redStat, blueStat)}</div>

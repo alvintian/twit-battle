@@ -60,7 +60,7 @@ class CurrentBattle extends Component {
 					height: '100vh',
 					minHeight: '100vh',
 				}}>
-				<h3>CurrentBattles are displayed here</h3>
+				<h1 style={{ color: '#F5F5F5' }}>CurrentBattles are displayed here</h1>
 				{activematch.map(x => (
 					<ActiveMatch
 						match={x}
