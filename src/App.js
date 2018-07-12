@@ -24,13 +24,20 @@ const Home = () => (
 				flexDirection: 'column',
 				alignItems: 'center',
 			}}>
+			<h1 style={{ color: '#FFFFFF', fontWeight: 'bold', lineHeight: '30px' }}>
+				Twitter Battle!
+			</h1>
+			<h2 style={{ color: '#F5F5F5' }}>
+				Create Your Character Using Twitter Api to Battle Other Twitter
+				Character!
+			</h2>
 			<img
 				src={TwitterwarsHome}
 				width={'300px'}
 				style={{ marginTop: '20px' }}
 				alt=""
 			/>
-			<h1>Create Your Character!</h1>
+			<h1 className="heading-font">Create Your Character!</h1>
 			<div className="create-char-button">
 				<Link
 					style={{ textDecoration: 'none', color: '#111111' }}
@@ -38,7 +45,7 @@ const Home = () => (
 					Create Character
 				</Link>
 			</div>
-			<h1>View Current Battles! </h1>
+			<h1 className="heading-font">View Current Battles! </h1>
 			<div className="create-char-button">
 				<Link
 					style={{ textDecoration: 'none', color: '#111111' }}
@@ -86,7 +93,7 @@ class App extends Component {
 			charNames: [],
 			matchState: {},
 		};
-				this.getData();
+		this.getData();
 		this.matchInfo = this.matchInfo.bind(this);
 		this.postBattletoDB = this.postBattletoDB.bind(this);
 		this.postChartoDB = this.postChartoDB.bind(this);
@@ -100,34 +107,34 @@ class App extends Component {
 			});
 		});
 	};
-	matchInfo(match){	
-			this.setState({
-				matchState: match,
-			});
-		}
+	matchInfo(match) {
+		this.setState({
+			matchState: match,
+		});
+	}
 	componentDidMount() {
 		// this.socket = new WebSocket("ws://localhost:8080/");
 		// this.socket.addEventListener("message", event => {
 		// 	const responseMessage = JSON.parse(event.data);
 		// if(typeof(responseMessage)==='number'){
 		// 	console.log(responseMessage,"total users is a numb");
-		// return 	this.totalUsers(responseMessage);	
+		// return 	this.totalUsers(responseMessage);
 		// }
 		//   switch(responseMessage.type) {
-  //     case "incomingMessage":
-  //       // handle incoming message
-  //     break;
-  //     case "incomingNotification":
-	 //        // handle incoming notification
+		//     case "incomingMessage":
+		//       // handle incoming message
+		//     break;
+		//     case "incomingNotification":
+		//        // handle incoming notification
 		//  responseMessage.content= responseMessage.oldname+" has changed their name to "+responseMessage.username;
-  //       break;
-  //     default:
-  //       // show an error in the console if the message type is unknown
-  //       throw new Error("Unknown event type " + responseMessage.type);
+		//       break;
+		//     default:
+		//       // show an error in the console if the message type is unknown
+		//       throw new Error("Unknown event type " + responseMessage.type);
 		// 	}
 		// 	const messages = this.state.messages.concat(responseMessage);
 		// 	this.setState({messages: messages})
-//		});
+		//		});
 	}
 
 	postBattletoDB(team_Red, team_Blue) {
@@ -166,7 +173,7 @@ class App extends Component {
 				select: charAttr,
 			}),
 		}).then(response => {
-//			this.getData();
+			//			this.getData();
 		});
 	}
 
@@ -190,7 +197,7 @@ class App extends Component {
 		// 	message.username = this.state.currentUser.name;
 		// }
 		// this.socket.send(JSON.stringify(content));
-	}
+	};
 
 	render() {
 		let charNames = this.state.charNames;
@@ -255,9 +262,7 @@ class App extends Component {
 								exact
 								path="/NewChar"
 								render={() => (
-									<CreateCharacter
-										postChartoDB={this.postChartoDB}
-									/>
+									<CreateCharacter postChartoDB={this.postChartoDB} />
 								)}
 							/>
 							<Route
@@ -266,24 +271,31 @@ class App extends Component {
 								render={() => (
 									<SelectableCharacters
 										content={charNames}
-										postBattletoDB={this.postBattletoDB} 
+										postBattletoDB={this.postBattletoDB}
 										onMatchStart={this.handleMatchStart}
 										getData={this.getData}
 									/>
 								)}
 							/>
-						  	<Route exact path={"/CurBattle/:id"}
-									render={({match}) => (
-							<BattleScreen content={matchState} id={match.params.id} />
-								)}/>
-						  	<Route exact path={"/AllChar/:id"}
-									render={({match}) => (
-							<CharProfile content={matchState} id={match.params.id} />
-								)}/>
-							<Route exact path="/CurBattle" 
-									render={() => (
-							<CurrentBattle matchInfo={this.matchInfo}/>
-								)} />
+							<Route
+								exact
+								path={'/CurBattle/:id'}
+								render={({ match }) => (
+									<BattleScreen content={matchState} id={match.params.id} />
+								)}
+							/>
+							<Route
+								exact
+								path={'/AllChar/:id'}
+								render={({ match }) => (
+									<CharProfile content={matchState} id={match.params.id} />
+								)}
+							/>
+							<Route
+								exact
+								path="/CurBattle"
+								render={() => <CurrentBattle matchInfo={this.matchInfo} />}
+							/>
 						</Switch>
 					</div>
 				</Router>

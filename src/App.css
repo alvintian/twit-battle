@@ -19,11 +19,7 @@ body {
 }
 
 .heading-font {
-  
-  font-size: 36px;
-    font-weight: 700;
-    line-height: 44px;
-    margin: 0;
+  color: #ffffff;
 }
 
 .App-header {
@@ -78,6 +74,7 @@ li {
   transform: perspective(300px) rotateX(-30deg);
   color: #f1f1f1;
   box-shadow: 5px 18px 46px 5px #222;
+  height: 94px;
 }
 .redSide > * {    
   transform: none;   
@@ -86,7 +83,12 @@ li {
 
 .opacity {
   opacity: 0.5;
-  background-color: #111111;
+  background: #FF4136 !important; 
+  /* background: 
+  -moz-linear-gradient(green, green) 0px 0px no-repeat !important;
+  -moz-linear-gradient(red, red) 200px 50px no-repeat !important,
+  -moz-linear-gradient(blue, blue) 0px 250px no-repeat !important,
+  -moz-linear-gradient(gray, gray) 300px 125px no-repeat !important; */
 }
 
 .blueSide {
@@ -94,10 +96,11 @@ li {
   background-Color: #0074D9;
   width: 48%;
   overflow: auto;
-  height: 100%;
   color: #f1f1f1;
   transform: perspective(300px) rotateX(30deg);
   transform-origin: 100% 0%;
+  height: 94px;
+  
 
                
 box-shadow: 5px 18px 46px 5px #222;
@@ -105,7 +108,11 @@ box-shadow: 5px 18px 46px 5px #222;
 }
 
 
- .blueSide > * {    transform: none;   transform-origin: none}
+ .blueSide > * {  
+  transform: perspective(-300px) rotateX(-30deg) !important;
+  transform-origin: 100% 0%;
+  
+}
 
 
 .matchBorder .matchId{
@@ -226,4 +233,13 @@ margin-right: 20%;
       padding: 10px;
   }
   
+  input[type="file"] {
+   
+}
 
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}

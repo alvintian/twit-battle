@@ -234,17 +234,29 @@ class CreateCharacter extends Component {
 									value={this.state.newCharDescription}
 									onChange={this.handleChange}
 								/>
-								<input
-									type="file"
-									name="photo"
-									className="photo"
-									onChange={this.handleUpload}
-								/>
-								<div>
+								<div
+									style={{
+										display: 'flex',
+										justifyContent: 'center',
+										alignItems: 'center',
+										marginTop: '5px',
+										marginBottom: '5px',
+										flexDirection: 'column',
+									}}>
+									<div style={{ marginTop: '10px', marginBottom: '15px' }}>
+										<input
+											type="file"
+											name="photo"
+											className="photo"
+											onChange={this.handleUpload}
+										/>
+									</div>
+
 									<input
 										type="submit"
 										value="Submit"
 										className="create-char-button"
+										style={{ height: '40%', width: '40%' }}
 									/>
 								</div>
 							</form>
