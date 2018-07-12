@@ -56,7 +56,7 @@ class AllCharacters extends Component {
 			: {
 					backgroundColor: '#57609E',
 			  };
-
+		console.log();
 		if (
 			this.props.createBattleClicked === false &&
 			this.state.characterClicked === true
