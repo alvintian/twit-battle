@@ -4,7 +4,7 @@ import Twitterpreview from './Twitterpreview.jsx';
 // import Message from "./Message.jsx";
 // import $ from 'jquery';
 import Popup from 'reactjs-popup';
-
+import { Redirect } from 'react-router-dom';
 class CreateCharacter extends Component {
 	constructor(props) {
 		super(props);
@@ -16,6 +16,7 @@ class CreateCharacter extends Component {
 			newCharDescription: '',
 			inputLinkClicked: false,
 			modalIsOpen: false,
+			active:false
 		};
 		this.fd = new FormData();
 		this.handleChange = this.handleChange.bind(this);
@@ -101,16 +102,15 @@ class CreateCharacter extends Component {
 			// 	Accept: 'application/json',
 			// 	'Content-Type': 'application/json',
 			// },
-			body: this.fd,
+			body: this.fd
 			//   JSON.stringify({
 			//   	  newName: "this.state.newName",
 			//    newCharDescription: this.state.newCharDescription
 			// })
-		})
-			.then(res => res.text())
-			.catch(err => {
-				alert('failed');
-			});
+		}).then(
+				this.setState({
+			active: true
+		}))
 		//   handleSubmit(event) {
 		//     event.preventDefault();
 		//     for (var key of this.fd.entries()) {
@@ -144,6 +144,9 @@ class CreateCharacter extends Component {
 	// onClick={this.setState({ inputLinkClicked:false })}
 	componentDidMount() {}
 	render() {
+	  		if (this.state.active === true) {
+    			return <Redirect to={'/AllChar'} />;
+     		}
 		return (
 			<div
 				style={{

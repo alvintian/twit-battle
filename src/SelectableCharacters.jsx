@@ -75,7 +75,6 @@ class SelectableCharacters extends Component {
 			BlueTeamCharId: 0,
 		});
 	}
-
 	componentDidMount() {
 		this.props.getData();
 	}

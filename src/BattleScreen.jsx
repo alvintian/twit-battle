@@ -5,6 +5,8 @@ import RedSide from './RedSide.jsx';
 import BlueSide from './BlueSide.jsx';
 import BattleTime from './BattleTime.jsx';
 import { ProgressBar } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+
 class BattleScreen extends Component {
 	constructor(props) {
 		super(props);
@@ -14,6 +16,8 @@ class BattleScreen extends Component {
 			cur_red_hp: null,
 			cur_blue_hp: null,
 			displayWinner: false,
+			redPTurn:true,
+			active:false
 			// redStat: {red_name: this.props.content.red_name,
 			// 			hp: this.props.content.red_hp,
 			// 	    attack: this.props.content.red_attack},
@@ -23,8 +27,13 @@ class BattleScreen extends Component {
 		};
 		//    this.props.onMessageSubmit(this.state.content)
 		//this.checkWinner = this.checkWinner.bind(this);
+		this.handleBackButton = this.handleBackButton.bind(this);
 	}
-
+handleBackButton(){
+	this.setState({
+		active:true
+	})
+}
 	parseBattle = x => {
 		//zach's code great help!
 		let battleObj = {};
@@ -76,34 +85,37 @@ class BattleScreen extends Component {
 					'what is redhp?'
 				);
 				if (this.state.cur_red_hp > 0 && this.state.cur_blue_hp > 0) {
-					this.setState({
-						cur_red_hp: this.state.cur_red_hp - this.state.blueStat.attack,
-						cur_blue_hp: this.state.cur_blue_hp - this.state.redStat.attack,
-					});
+					if(this.state.redPTurn===true){
+					this.setState(prevState =>{
+     						return {redPTurn: !prevState.redPTurn,
+								cur_blue_hp: this.state.cur_blue_hp - this.state.redStat.attack
+					}});
+				}else{
+					this.setState(prevState =>{
+     						return {redPTurn: !prevState.redPTurn,
+									cur_red_hp: this.state.cur_red_hp - this.state.blueStat.attack,
+					}});
 				}
+				}else if (this.state.cur_red_hp <= 0) {
+					this.setState({
+						displayWinner: true,
 
-				if (this.state.cur_red_hp <= 0) {
+					});
+							clearInterval(this.timer);
+				}
+				else if (this.state.cur_blue_hp <= 0) {
 					this.setState({
 						displayWinner: true,
 					});
+							clearInterval(this.timer);
 				}
-				if (this.state.cur_blue_hp <= 0) {
-					this.setState({
-						displayWinner: true,
-					});
-				}
-
-				console.log(this.state.cur_red_hp, 'what is redhp after set??');
+//				console.log(this.state.cur_red_hp, 'what is redhp after set??');
 			}.bind(this),
-			1000
+			500
 		);
 	}
 	componentWillUnmount() {
 		clearInterval(this.timer);
-		if (
-			this.state.redStat.attack - this.state.blueStat.hp >
-			this.state.blueStat.attack - this.state.redStat.hp
-		) {
 			fetch('/api/updateChar', {
 				method: 'post',
 				headers: {
@@ -112,27 +124,16 @@ class BattleScreen extends Component {
 				},
 				//make sure to serialize your JSON body
 				body: JSON.stringify({
-					character: this.state.blueStat.blue_name,
+					character: (this.state.cur_blue_hp <= 0) ? this.state.blueStat.blue_name:this.state.redStat.red_name,
 					battleID: this.props.content.BATTLEID,
+					red_side_hp:this.state.cur_red_hp,
+					blue_side_hp:this.state.cur_blue_hp
 				}),
 			});
-		} else {
-			fetch('/api/updateChar', {
-				method: 'post',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				//make sure to serialize your JSON body
-				body: JSON.stringify({
-					character: this.state.redStat.red_name,
-					battleID: this.props.content.BATTLEID,
-				}),
-			});
-		}
 	}
+
 	checkWinner = (redStat, blueStat) => {
-		if (redStat.attack - blueStat.hp > blueStat.attack - redStat.hp) {
+		if (this.state.cur_blue_hp <= 0) {
 			return <RedSide redP={redStat} />;
 		} else {
 			return <BlueSide blueP={blueStat} />;
@@ -145,7 +146,9 @@ class BattleScreen extends Component {
 			(this.state.cur_red_hp / this.state.redStat.hp) * 100;
 		let blueHealthPercent =
 			(this.state.cur_blue_hp / this.state.blueStat.hp) * 100;
-
+    	  		if (this.state.active === true) {
+       			return <Redirect to={'/AllChar'} />;
+        		}
 		return (
 			<div className="battleStage">
 				<h3 style={{ color: '#111111' }}>{this.state.redStat.red_name}</h3>
@@ -173,6 +176,13 @@ class BattleScreen extends Component {
 						<div>
 							<div>{this.checkWinner(redStat, blueStat)}</div>
 						</div>
+						<button
+							className="create-char-button"
+							style={{ margin: '0 auto' }}
+							type="button"
+							onClick={this.handleBackButton}>
+							Create Another Battle
+						</button>
 					</div>
 				) : (
 					<div>
