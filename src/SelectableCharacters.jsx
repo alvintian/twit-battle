@@ -12,7 +12,7 @@ class SelectableCharacters extends Component {
 			createBattleClicked: false,
 			active: false,
 			battleid: 0,
-			clickedState: 0,
+			clickedState: false
 		};
 		this.handleCreateBattle = this.handleCreateBattle.bind(this);
 		this.handlecancel = this.handlecancel.bind(this);
@@ -45,20 +45,18 @@ class SelectableCharacters extends Component {
 	};
 	handleClickCard = card => {
 		console.log(this.state, 'what is carddddddddddd');
-		// this.setState({
-		// 	characterClicked:true
-		// })
+		this.setState({
+			clickedState:true
+		})
 		if (this.state.RedTeamCharId === 0) {
 			this.setState({
 				RedTeamCharId: card.id,
 				BlueTeamCharId: this.state.BlueTeamCharId,
-				clickedState: this.state.clickedState + 1,
 			});
 		} else {
 			this.setState({
 				RedTeamCharId: this.state.RedTeamCharId,
 				BlueTeamCharId: card.id,
-				clickedState: this.state.clickedState + 1,
 			});
 		}
 	};
@@ -73,6 +71,7 @@ class SelectableCharacters extends Component {
 			createBattleClicked: false,
 			RedTeamCharId: 0,
 			BlueTeamCharId: 0,
+			clickedState:false
 		});
 	}
 	componentDidMount() {

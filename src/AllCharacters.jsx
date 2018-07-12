@@ -11,8 +11,8 @@ class AllCharacters extends Component {
 			active: false,
 			createBattleClicked: this.props.createBattleClicked,
 			characterClicked: false,
-			counter: 0,
-			stateColor: 0,
+//			counter: 0,
+			secondActive:false
 		};
 	}
 
@@ -45,49 +45,53 @@ class AllCharacters extends Component {
 		// 			backgroundColor: '#57609E',
 		// 	  };
 
-		const style = this.state.active
-			? this.props.colorRedTeamCharId !== 0
-				? this.props.colorBlueTeamCharId !== 0
-					? {
-							backgroundColor: '#FF4136',
-					  }
-					: { backgroundColor: '#0074D9' }
-				: { backgroundColor: '#0074D9' }
-			: {
-					backgroundColor: '#57609E',
-			  };
-		console.log();
+		// const style = this.state.active
+		// 	? this.props.colorRedTeamCharId !== 0
+		// 		? this.props.colorBlueTeamCharId !== 0
+		// 			? {
+		// 					backgroundColor: '#FF4136',//red!
+		// 			  }
+		// 			: { backgroundColor: '#0074D9' }//light blue~!
+		// 		: { backgroundColor: '#0074D9' }//light blue!
+		// 	: {
+		// 			backgroundColor: '#57609E',//normal!
+		// 	  };
+//		secondActive
+		const style = this.state.active ?(this.state.secondActive ? { backgroundColor: '#0074D9' }
+		: {	backgroundColor: '#FF4136'})
+		:({
+		  						backgroundColor: '#57609E'
+		  })
+
 		if (
 			this.props.createBattleClicked === false &&
 			this.state.characterClicked === true
 		) {
-			//			console.log(this.props.characterClicked,"props or false??")
-			console.log(this.state.characterClicked, 'state or false??');
 			return <Redirect to={'/AllChar/' + this.props.message.id} />;
 		}
+		console.log(this.state.active,this.state.secondActive,"what are the two actives??")
 		let profile = (
 			<div
 				className={'border ' + (message.eliminated === true ? 'opacity' : null)}
 				onClick={e => {
-					if (e.target.classList.contains('opacity')) {
-						return;
-					}
+					// if (e.target.classList.contains('opacity')) {
+					// 	return;
+					// }
 					this.props.onCharClick(message);
 					this.setState(prevState => {
 						return {
-							active: !prevState.active,
+							active: false? !prevState.active : true,
 							characterClicked:
 								this.props.createBattleClicked === false
 									? !prevState.characterClicked
 									: false,
-							stateColor: this.state.stateColor + 1,
+							secondActive:this.state.active ? true: false
 						};
 					});
 				}}
 				style={style}>
 				{/* {message.eliminated === true ? <h2>elimnated</h2> : <h2>Alive</h2>} */}
 				<h2 style={{ color: 'white' }}>{message.name}</h2>
-
 				<h3 style={{ margin: '10px' }}>HP: {message.hp}</h3>
 				<h3 style={{ margin: '10px' }}>ATT: {message.attack}</h3>
 				<img src={message.picture} width={'200px'} height={'200px'} alt="" />
