@@ -29,7 +29,7 @@ exports.up = function(knex, Promise) {
 			table.string('red_side_hp')
 			table.string('blue_side_hp')
 			table.boolean('active')
-			table.integer('timer')
+			table.decimal('timer')
 		})
 	};
 
@@ -74,14 +74,16 @@ exports.up = function(knex, Promise) {
 				blue_side_id_fk: 2,
 				red_side_hp: 14,
 				blue_side_hp: 0,
-				active:false
+				active:false,
+				timer:8.5
 			},
 			{
 				red_side_id_fk: 1,
 				blue_side_id_fk: 3,
 				red_side_hp: 30,
 				blue_side_hp: 0,
-				active:false
+				active:false,
+				timer:9.0
 			}
 			])
 		])

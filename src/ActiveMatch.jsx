@@ -49,7 +49,7 @@ class ActiveMatch extends Component {
 
 	render() {
 		const { match } = this.props;
-		if (this.state.active === true) {
+		if (this.state.active === true && match.active) {
 			return <Redirect to={'/CurBattle/' + match.BATTLEID} />;
 		}
 
@@ -106,6 +106,9 @@ class ActiveMatch extends Component {
 						<div style={{ marginLeft: '40px' }}>
 							<h1 style={{ color: '#303030', opacity: '0.7' }}>VS</h1>
 						</div>
+						{match.active ? 
+							null :<div>Battle Lasted: {match.timer} seconds</div>
+						}
 						<div className="blueSide" />
 						<div
 							style={{

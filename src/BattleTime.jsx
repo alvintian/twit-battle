@@ -21,7 +21,8 @@ class BattleTime extends Component {
     componentWillUnmount(){
         // This method is called immediately before the component is removed
         // from the page and destroyed. We can clear the interval here:
-        console.log("what time is it?",this.state.elapsed)
+        console.log("what time is it?",(Math.round(this.state.elapsed/100)/10).toFixed(1))
+        this.props.onHandleRecordTime((Math.round(this.state.elapsed/100)/10).toFixed(1))
         clearInterval(this.timer);
     }
 tick(){
@@ -33,7 +34,7 @@ tick(){
         // This will give a number with one digit after the decimal dot (xx.x):
         var seconds = (elapsed / 10).toFixed(1);
         //console.log(seconds,"what is the second??")    
-    return (<p>This example was started <b>{seconds} seconds</b> ago.</p>)
+    return (<b>{seconds}</b>)
   }
     }
 export default BattleTime;

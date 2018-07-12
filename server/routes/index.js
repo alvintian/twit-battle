@@ -335,7 +335,8 @@ module.exports = function(knex) {
 			.where('id','=', req.body.battleID)
 			.update({'active': false,
 					'red_side_hp':req.body.red_side_hp,
-					'blue_side_hp':req.body.blue_side_hp})
+					'blue_side_hp':req.body.blue_side_hp,
+					'timer':req.body.time})
 		.then((result) => {
 console.log(result,"update battle active")})
 	

@@ -18,6 +18,8 @@ class BattleScreen extends Component {
 			displayWinner: false,
 			redPTurn: true,
 			active: false,
+			recordTime:0,
+			battlestart:Date.now()
 			// redStat: {red_name: this.props.content.red_name,
 			// 			hp: this.props.content.red_hp,
 			// 	    attack: this.props.content.red_attack},
@@ -28,12 +30,20 @@ class BattleScreen extends Component {
 		//    this.props.onMessageSubmit(this.state.content)
 		//this.checkWinner = this.checkWinner.bind(this);
 		this.handleBackButton = this.handleBackButton.bind(this);
+		this.handlerecordTime= this.handlerecordTime.bind(this);
 	}
 	handleBackButton() {
 		this.setState({
 			active: true,
 		});
-	}
+	} 
+handlerecordTime(x){
+	console.log(x,"what is xxxxxxxxxxx");
+		this.setState({
+		recordTime: x
+			});
+}
+
 	parseBattle = x => {
 		//zach's code great help!
 		let battleObj = {};
@@ -139,6 +149,7 @@ class BattleScreen extends Component {
 				battleID: this.props.content.BATTLEID,
 				red_side_hp: this.state.cur_red_hp,
 				blue_side_hp: this.state.cur_blue_hp,
+				time:this.state.recordTime
 			}),
 		});
 	}
@@ -181,29 +192,29 @@ class BattleScreen extends Component {
 					striped
 					bsStyle="info"
 				/>
-				{/*				 <BattleTime start={Date.now()} /> 
-*/}
 				{this.state.displayWinner === true ? (
 					<div>
 						<div style={{ color: '#111111' }}>
 							<h1 style={{ color: '#FFFFFF', fontWeight: 'bold' }}>Winner</h1>
 						</div>
+						Lasted: {this.state.recordTime} seconds
 						<div>
-							<div>{this.checkWinner(redStat, blueStat)}</div>
+					<div>{this.checkWinner(redStat, blueStat)}</div>
 						</div>
 						<button
 							className="create-char-button"
 							style={{ margin: '0 auto' }}
 							type="button"
 							onClick={this.handleBackButton}>
-							Create Another Battle
+							Back to all characters
 						</button>
 					</div>
 				) : (
-					<div>
+				 <div><div><BattleTime start={this.state.battlestart} onHandleRecordTime={this.handlerecordTime}/> 
+					</div><div>
 						<RedSide redP={redStat} />
 						<BlueSide blueP={blueStat} />
-					</div>
+					</div></div>
 				)}
 			</div>
 		);
