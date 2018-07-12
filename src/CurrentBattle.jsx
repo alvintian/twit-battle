@@ -34,16 +34,20 @@ class CurrentBattle extends Component {
 					BATTLEID: battle.BATTLEID,
 				};
 			}
+				battleObj[battle.BATTLEID].active = battle.active;
+				battleObj[battle.BATTLEID].timer = battle.timer;
 			if (battle.id === battle.red_side_id_fk) {
 				battleObj[battle.BATTLEID].red_name = battle.name;
 				battleObj[battle.BATTLEID].red_hp = battle.hp;
 				battleObj[battle.BATTLEID].red_attack = battle.attack;
 				battleObj[battle.BATTLEID].red_picture = battle.picture;
+				battleObj[battle.BATTLEID].red_side_hp = battle.red_side_hp;
 			} else if (battle.id === battle.blue_side_id_fk) {
 				battleObj[battle.BATTLEID].blue_name = battle.name;
 				battleObj[battle.BATTLEID].blue_hp = battle.hp;
 				battleObj[battle.BATTLEID].blue_attack = battle.attack;
-				battleObj[battle.BATTLEID].red_picture = battle.picture;
+				battleObj[battle.BATTLEID].blue_picture = battle.picture;
+				battleObj[battle.BATTLEID].blue_side_hp = battle.blue_side_hp;
 			}
 		});
 		this.setState({
@@ -53,7 +57,7 @@ class CurrentBattle extends Component {
 
 	render() {
 		let activematch = this.state.data;
-		// console.log(this.props.matchInfo,"is matchinfo defined in currentbattle?")
+		console.log(activematch,"activematch made sense????")
 		return (
 			<div
 				style={{

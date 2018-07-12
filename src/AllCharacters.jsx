@@ -61,7 +61,6 @@ class AllCharacters extends Component {
 		) {
 			return <Redirect to={'/AllChar/' + this.props.message.id} />;
 		}
-		console.log(this.state.active,this.state.secondActive,"what are the two actives??")
 		let profile = (
 			<div
 				ref="element"

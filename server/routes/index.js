@@ -98,7 +98,10 @@ module.exports = function(knex) {
 	});
 	router.get('/AllChar/:id/battles', (req, res) => {
 		knex
-			.select('users.name', 'users.id','battle.id AS BATTLEID', 'red_side_id_fk', 'blue_side_id_fk')
+			.select('users.name', 'users.id','battle.id AS BATTLEID', 'red_side_id_fk', 'blue_side_id_fk','red_side_hp',
+				'blue_side_hp',
+				'active',
+				'timer')
 			.from('users')
 			.join('battle', function() {
 				this.on('battle.red_side_id_fk', '=', 'users.id').orOn('battle.blue_side_id_fk', '=', 'users.id')
@@ -116,6 +119,10 @@ module.exports = function(knex) {
 				'battle.id AS BATTLEID',
 				'red_side_id_fk',
 				'blue_side_id_fk',
+				'red_side_hp',
+				'blue_side_hp',
+				'active',
+				'timer',
 				'users.id',
 				'users.name',
 				'users.hp',
@@ -288,21 +295,52 @@ module.exports = function(knex) {
      res.json(result[0]);
       });
 	});
+	// router.post('/updateChar', (req, res) => {
+	// 	knex('users')
+	// 		.where({ id: req.body.character || 'lol' })
+	// 		.update({ eliminated: true })
+	// 		.then(x => {
+	// 			console.log('user', x);
+	// 		});
+
+	// 	knex('battle')
+	// 		.where({ id: req.body.battleID || 0 })
+	// 		.update({ active: false })
+	// 		.then(x => {
+	// 			console.log('battle update', x);
+	// 			res.send('ok');
+	// 		});
 	router.post('/updateChar', (req, res) => {
 		knex('users')
-			.where({ name: req.body.character || 'lol' })
-			.update({ eliminated: true })
-			.then(x => {
-				console.log('user', x);
-			});
+			.where('id','=', req.body.character)
+			.update({'eliminated':true}).then(x => {
+				console.log('update char');});
 
-		knex('battle')
-			.where({ id: req.body.battleID || 0 })
-			.update({ active: false })
-			.then(x => {
-				console.log('battle update', x);
-				res.send('ok');
-			});
+			knex('users')
+			.where('id','=', req.body.charWinner)
+			.increment('matches', 1).then(x => {
+				console.log('increment charWinner')});
+
+			knex('users')
+			.where('id','=', req.body.charWinner)
+			.increment('attack', 15).then(x => {
+				console.log('increment charWinner attack')});
+
+			knex('users')
+			.where('id','=', req.body.character)
+			.increment('matches', 1).then(x => {
+				console.log('increment char')});
+
+			knex('battle')
+			.where('id','=', req.body.battleID)
+			.update({'active': false,
+					'red_side_hp':req.body.red_side_hp,
+					'blue_side_hp':req.body.blue_side_hp})
+		.then((result) => {
+console.log(result,"update battle active")})
+	
+
+
 
 		// knex('battle')
 		// 	.where({ id: req.body.battleID || 0 })

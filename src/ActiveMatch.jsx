@@ -96,6 +96,12 @@ class ActiveMatch extends Component {
 							<h4 style={{ color: '#F5F5F5', fontWeight: 'bold' }}>
 								{match.red_name}
 							</h4>
+							{match.active ?
+							null 
+							: <h4 style={{ color: '#F5F5F5', fontWeight: 'bold' }}>
+								{match.red_side_hp}
+							</h4>
+							 }
 						</div>
 						<div style={{ marginLeft: '40px' }}>
 							<h1 style={{ color: '#303030', opacity: '0.7' }}>VS</h1>
@@ -110,6 +116,11 @@ class ActiveMatch extends Component {
 							<h4 style={{ color: '#F5F5F5', fontWeight: 'bold' }}>
 								{match.blue_name}
 							</h4>
+								{match.active ? 
+							null : <h4 style={{ color: '#F5F5F5', fontWeight: 'bold' }}>
+								{match.blue_side_hp}
+							</h4>
+							 }
 						</div>
 					</div>
 				</div>
