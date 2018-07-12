@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AllCharacters from './AllCharacters.jsx';
-
+import { Redirect } from 'react-router-dom';
 // import Message from "./Message.jsx";
 
 class SelectableCharacters extends Component {
@@ -10,16 +10,32 @@ class SelectableCharacters extends Component {
 			RedTeamCharId: 0,
 			BlueTeamCharId: 0,
 			createBattleClicked: false,
+			active:false,
+			battleid:0
 		};
 		this.handleCreateBattle=this.handleCreateBattle.bind(this);
 		this.handlecancel=this.handlecancel.bind(this);
 	}
 	handleBattleStart = () => {
-		this.props.postBattletoDB(
-			this.state.RedTeamCharId,
-			this.state.BlueTeamCharId
-		);
-		console.log(this.state, 'BATTLE START!');
+		fetch('/api/CurBattle', {
+			method: 'post',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			//make sure to serialize your JSON body
+			body: JSON.stringify({
+				teamRed: this.state.RedTeamCharId,
+				teamBlue: this.state.BlueTeamCharId
+			}),
+		})
+	.then(response => response.json())
+	.then(response => {
+		this.setState({
+		active: true,
+		battleid:Number(response)
+		});
+})//		console.log(this.state, 'BATTLE START!');
 		let webSocketData = {
 			type: "battleTimer"
 		// battleId: "Id" 
@@ -63,6 +79,9 @@ this.setState({
 	}
 	render() {
 		let charNames = this.props.content;
+		if (this.state.active === true) {
+			return <Redirect to={'/CurBattle/'} />
+		}
 		return (
 			<div>
 				{this.state.createBattleClicked ? (
