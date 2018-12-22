@@ -108,9 +108,12 @@ class CreateCharacter extends Component {
 			//    newCharDescription: this.state.newCharDescription
 			// })
 		}).then(
+				setTimeout(() => {
 				this.setState({
-			active: true
-		}))
+					active: true
+				})
+			},500)
+				)
 		//   handleSubmit(event) {
 		//     event.preventDefault();
 		//     for (var key of this.fd.entries()) {

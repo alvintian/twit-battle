@@ -6,19 +6,13 @@ var fs = require('fs');
 var request = require('request');
 
 const getBearerToken = require('get-twitter-bearer-token');
-const twitter_consumer_key = 'TwLpS2IZT9mzyCpd31C6f2Ykk';
-const twitter_consumer_secret =
-	'nxs5IONxiEdp6CBQEvL48KRju1CMAgQaB6rCbqUyTtyJAvWa4U';
-let twitter_bearer_token =
-	'AAAAAAAAAAAAAAAAAAAAAHCS6wAAAAAAUrdisbS22LUsBJCl%2BzV%2B2qaEse0%3DFHxzYB2mSY487EtCGN0Il3PdxfdmiLL9M0UCDcVKjUKxCPTbhZ';
-
-getBearerToken(twitter_consumer_key, twitter_consumer_secret, (err, res) => {
+getBearerToken(process.env.TWITTER_CONSUMER_KEY, process.env.TWITTER_CONSUMER_SECRET, (err, res) => {
 	if (err) {
 		// handle error
 	} else {
 		// bearer token
 		console.log(res.body.access_token);
-		twitter_bearer_token = res.body.access_token;
+		process.env.TWITTER_BEARER_TOKEN = res.body.access_token;
 	}
 });
 
@@ -56,9 +50,9 @@ module.exports = function(knex) {
 	};
 
 	var client = new Twitter({
-		consumer_key: 'TwLpS2IZT9mzyCpd31C6f2Ykk',
-		consumer_secret: 'nxs5IONxiEdp6CBQEvL48KRju1CMAgQaB6rCbqUyTtyJAvWa4U',
-		bearer_token: twitter_bearer_token,
+		consumer_key: process.env.TWITTER_CONSUMER_KEY,
+		consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+		bearer_token: process.env.TWITTER_BEARER_TOKEN,
 	});
 	// var params = { screen_name: 'nodejs' };
 

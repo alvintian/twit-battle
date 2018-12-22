@@ -95,7 +95,7 @@ class App extends Component {
 		};
 		this.getData();
 		this.matchInfo = this.matchInfo.bind(this);
-		this.postBattletoDB = this.postBattletoDB.bind(this);
+		// this.postBattletoDB = this.postBattletoDB.bind(this);
 		this.postChartoDB = this.postChartoDB.bind(this);
 		// this.handleClickCard=this.handleClickCard.bind(this);
 	}
@@ -137,20 +137,20 @@ class App extends Component {
 		//		});
 	}
 
-	postBattletoDB(team_Red, team_Blue) {
-		fetch('/api/CurBattle', {
-			method: 'post',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			//make sure to serialize your JSON body
-			body: JSON.stringify({
-				teamRed: team_Red,
-				teamBlue: team_Blue,
-			}),
-		});
-	}
+	// postBattletoDB(team_Red, team_Blue) {
+	// 	fetch('/api/CurBattle', {
+	// 		method: 'post',
+	// 		headers: {
+	// 			Accept: 'application/json',
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		//make sure to serialize your JSON body
+	// 		body: JSON.stringify({
+	// 			teamRed: team_Red,
+	// 			teamBlue: team_Blue,
+	// 		}),
+	// 	});
+	// }
 	postChartoDB(charName, charAttr) {
 		// $.ajax({
 		// 	url: '/api/NewChar',
@@ -271,7 +271,7 @@ class App extends Component {
 								render={() => (
 									<SelectableCharacters
 										content={charNames}
-										postBattletoDB={this.postBattletoDB}
+							
 										onMatchStart={this.handleMatchStart}
 										getData={this.getData}
 									/>
