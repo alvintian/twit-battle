@@ -3,17 +3,23 @@ my twit-battle project made with my teamate for school. this project allows user
 
 ## Usage
 Install the dependencies and start the server.
-
+<br>
 git clone git@github.com:alvintian/twit-battle.git
-
+<br>
 cd twit-battle
-
+<br>
 npm install 
-
+<br>
 knex migrate:latest
-
+<br>
 npm start
-
+<br>
+screen shot
+<br>
+screenshot:
+![](screenshot/one.png)
+![](screenshot/two.png)
+![](screenshot/three.png)
 ## Dependencies
 multer
 knex
