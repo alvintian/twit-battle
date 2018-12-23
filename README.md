@@ -14,12 +14,10 @@ knex migrate:latest
 <br>
 npm start
 <br>
-screen shot
-<br>
 screenshot:
-![](screenshot/one.png)
-![](screenshot/two.png)
-![](screenshot/three.png)
+<img src="screenshot/one.png" height='500px'>
+<img src="screenshot/two.png" height='500px'>
+<img src="screenshot/three.png" height='500px'>
 ## Dependencies
 multer
 knex
